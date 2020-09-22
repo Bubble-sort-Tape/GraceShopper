@@ -1,7 +1,7 @@
 'use strict'
 
 const db = require('../server/db')
-const {User} = require('../server/db/models')
+const {User, Product} = require('../server/db/models')
 
 async function seed() {
   await db.sync({force: true})
@@ -25,7 +25,29 @@ async function seed() {
     }),
   ])
 
+  const products = await Promise.all([
+    Product.create({
+      productName: "Bertie Bott's Every Flavor Beans",
+      description:
+        'Delicious normal jelly beans are mixed with crazy, creepy flavors in a 20-flavor magical medley, which keeps tasters guessing whether they’ll get a tasty or tricky flavor with every bite. Some of the tasty flavors include Marshmallow, Cherry, Cinnamon and Blueberry. These are paired with gross flavors like Vomit, Soap and Earwax as well as odd flavors like Sausage, Grass and Black Pepper for a fun and risky experience.',
+      imageUrl:
+        'https://vignette.wikia.nocookie.net/harrypotter/images/6/60/Bertie_Botts_EFB.png/revision/latest/scale-to-width-down/341?cb=20161128010133',
+      price: 3.5,
+      inventory: 50,
+    }),
+    Product.create({
+      productName: 'Chocolate Frogs',
+      description:
+        'Chocolate frogs are a very popular sweet made from chocolate in the form of a frog. They come with a collectible card of a famous witch or wizard in each pack. The frogs are made of seventy percent Croakoa. Presumably, this substance is what allows them to act like an actual frog.',
+      imageUrl:
+        'https://cdn.shopify.com/s/files/1/0221/1146/products/ChocolateFrogPin1_large.png?v=1579875491',
+      price: 4.5,
+      inventory: 27,
+    }),
+  ])
+
   console.log(`seeded ${users.length} users`)
+  console.log(`seeded ${products.length} products`)
   console.log(`seeded successfully`)
 }
 
