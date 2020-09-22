@@ -17,21 +17,24 @@ export class SingleProduct extends React.Component {
           <div>About this product: {product.description}</div>
           <div>
             <form>
-              <label>Quantity:</label>
-              <select>
-                <option selected value="one">
-                  1
-                </option>
-                <option value="two">2</option>
-                <option value="three">3</option>
-                <option value="four">4</option>
-                <option value="five">5</option>
-                <option value="six">6</option>
-                <option value="seven">7</option>
-                <option value="eight">8</option>
-                <option value="nine">9</option>
-                <option value="ten">10</option>
-              </select>
+              <label>
+                Quantity
+                <select>
+                  <option selected value="one">
+                    1
+                  </option>
+                  <option value="two">2</option>
+                  <option value="three">3</option>
+                  <option value="four">4</option>
+                  <option value="five">5</option>
+                  <option value="six">6</option>
+                  <option value="seven">7</option>
+                  <option value="eight">8</option>
+                  <option value="nine">9</option>
+                  <option value="ten">10</option>
+                </select>
+              </label>
+              <input type="submit" value="Checkout" />
             </form>
           </div>
           <div>//ADD TO CART BUTTON</div>
