@@ -9,7 +9,7 @@ export const AllProductsCard = (props) => {
   const {product} = props
   console.log(product)
   return (
-    <div>
+    <div className="all-products-card">
       <img src={product.imageURL} width="200" height="200"></img>
       <div>{product.name}</div>
       <div>{product.price}</div>
@@ -20,6 +20,7 @@ export const AllProductsCard = (props) => {
 /**
  * REDUX CONTAINER
  */
+export default AllProductsCard
 
 /**
  * PROP TYPES

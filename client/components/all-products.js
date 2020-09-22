@@ -4,34 +4,16 @@ import PropTypes from 'prop-types'
 import {AllProductsCard} from './all-products-card'
 
 /**
- * DUMMY DATA
- */
-
-const products = [
-  {
-    id: 1,
-    name: 'beans',
-    price: '$1',
-    imageURL: 'https://i.imgur.com/DLrwUP7.png',
-  },
-  {
-    id: 2,
-    name: 'a wand',
-    price: '$10',
-    imageURL: 'https://i.imgur.com/jim3MSJ.png',
-  },
-]
-
-/**
  * COMPONENT
  */
 export const AllProducts = (props) => {
-  //const {products} = props
+  const {products} = props
+  console.log(products)
 
   return (
     <div>
       <div>Generic Welcome Message!</div>
-      <div>
+      <div className="all-products-list">
         {products.map((product) => (
           <AllProductsCard key={product.id} product={product} />
         ))}
