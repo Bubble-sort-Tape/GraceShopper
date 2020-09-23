@@ -8,7 +8,7 @@ describe('Order model', () => {
   })
 
   describe('Correct data', () => {
-    describe('productInstance', () => {
+    describe('orderInstance', () => {
       let order
       beforeEach(async () => {
         order = await Order.create({

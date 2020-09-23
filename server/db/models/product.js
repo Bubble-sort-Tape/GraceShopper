@@ -10,6 +10,15 @@ const Product = db.define('product', {
   description: {
     type: Sequelize.TEXT,
   },
+  category: {
+    type: Sequelize.ENUM,
+    values: [
+      'Sweets',
+      'Practical Jokes',
+      'Muggle Magic',
+      'Explosive Enterprises',
+    ],
+  },
   imageUrl: {
     type: Sequelize.TEXT,
     allowNull: false,

@@ -1,7 +1,6 @@
 const Sequelize = require('sequelize')
 const User = require('./user')
 const Product = require('./product')
-const Category = require('./category')
 const Address = require('./address')
 const Order = require('./order')
 
@@ -10,9 +9,6 @@ const db = require('../db')
 /**
  * If we had any associations to make, this would be a great place to put them!
  */
-
-// Product-Category 1:M
-Category.hasMany(Product)
 
 // Order-Product M:M
 const OrdersProduct = db.define('OrdersProduct', {
@@ -27,13 +23,17 @@ Product.belongsToMany(Order, {through: OrdersProduct})
 
 // User-Address 1:M
 User.hasMany(Address)
+Address.belongsTo(User)
 
 // User-Order 1:M
 User.hasMany(Order)
+Order.belongsTo(User)
 
 // Order-Address 1:1
-Address.hasOne(Order, {foreignKey: 'shippingID'})
-Address.hasOne(Order, {foreignKey: 'billingID'})
+Address.hasMany(Order, {foreignKey: 'ShippingAddressId'})
+Address.hasMany(Order, {foreignKey: 'BillingAddressId'})
+Order.belongsTo(Address, {as: 'ShippingAddress'})
+Order.belongsTo(Address, {as: 'BillingAddress'})
 
 /**
  * We'll export all of our models here, so that any time a module needs a model,
@@ -44,7 +44,6 @@ Address.hasOne(Order, {foreignKey: 'billingID'})
 module.exports = {
   User,
   Product,
-  Category,
   Address,
   Order,
   OrdersProduct,
