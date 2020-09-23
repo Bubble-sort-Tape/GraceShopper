@@ -1,21 +1,32 @@
 import React from 'react'
 
-const dummyData = {
-  id: 1,
-  productName: 'Chocolate Frogs',
-  description:
-    'Chocolate frogs are a very popular sweet made from chocolate in the form of a frog. They come with a collectible card of a famous witch or wizard in each pack. The frogs are made of seventy percent Croakoa. Presumably, this substance is what allows them to act like an actual frog.',
-  imageUrl:
-    'https://cdn.shopify.com/s/files/1/0221/1146/products/ChocolateFrogPin1_large.png?v=1579875491',
-  price: 4.5,
-}
+const dummyData = [
+  {
+    id: 1,
+    name: 'beans',
+    price: '$1',
+    imageUrl: 'https://i.imgur.com/DLrwUP7.png',
+  },
+  {
+    id: 2,
+    name: 'a wand',
+    price: '$10',
+    imageUrl: 'https://i.imgur.com/jim3MSJ.png',
+  },
+]
 
 export class SingleProduct extends React.Component {
-  constructor() {
+  constructor(props) {
     super()
   }
 
   render() {
+    let {productId} = this.props.match.params
+    let products = this.props.products || dummyData
+    let product = products.find((obj) => {
+      return obj.id === Number(productId)
+    })
+
     return (
       <div className="Product">
         <div className="Product-left">
