@@ -27,3 +27,22 @@ router.get('/:productId', async (req, res, next) => {
     next(error)
   }
 })
+
+//PUT /api/product/:productId
+router.put('/:productId', async (req, res, next) => {
+  try {
+    const product = await Product.findOne({
+      where: {
+        id: req.params.productId,
+      },
+    })
+    if (!product) {
+      res.sendStatus(404)
+    } else {
+      const updatedProduct = await product.update(req.body)
+      res.json(updatedProduct)
+    }
+  } catch (error) {
+    next(error)
+  }
+})
