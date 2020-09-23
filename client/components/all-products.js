@@ -1,7 +1,8 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
 import {AllProductsCard} from './all-products-card'
+import {fetchAllProducts} from '../store/allProducts'
 
 const dummyData = [
   {
@@ -22,9 +23,12 @@ const dummyData = [
  * COMPONENT
  */
 export const AllProducts = (props) => {
-  //const {products} = props
-  const products = props.products || dummyData
 
+  useEffect(() => {
+    props.fetchAllProducts()
+  }, [])
+
+  const {products} = props || dummyData
   return (
     <div>
       <div>Generic Welcome Message!</div>
@@ -40,7 +44,16 @@ export const AllProducts = (props) => {
 /**
  * REDUX CONTAINER
  */
-export default AllProducts
+const mapStatetoProps = (state) => ({
+  products: state.allProducts,
+})
+const mapDispatchtoProps = (dispatch) => ({
+  fetchAllProducts: () => {
+    dispatch(fetchAllProducts())
+  },
+})
+
+export default connect(mapStatetoProps, mapDispatchtoProps)(AllProducts)
 
 /**
  * PROP TYPES
