@@ -1,5 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
+import {Link} from 'react-router-dom'
 import PropTypes from 'prop-types'
 
 /**
@@ -10,7 +11,9 @@ export const AllProductsCard = (props) => {
   return (
     <div className="all-products-card">
       <img src={product.imageUrl} width="200" height="200"></img>
-      <div>{product.name}</div>
+      <div>
+        <Link to={`/products/${product.id}`}>{product.name}</Link>
+      </div>
       <div>{product.price}</div>
     </div>
   )
