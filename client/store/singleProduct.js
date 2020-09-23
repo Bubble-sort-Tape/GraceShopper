@@ -18,3 +18,12 @@ export const fetchSingleProduct = (id) => async (dispatch) => {
     console.error(error)
   }
 }
+
+export default function singleProductReducer(state = null, action) {
+  switch (action.type) {
+    case SET_SINGLE_PRODUCT:
+      return action.product
+    default:
+      return state
+  }
+}
