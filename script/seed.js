@@ -1,7 +1,7 @@
 'use strict'
 
 const db = require('../server/db')
-const {User, Product} = require('../server/db/models')
+const {User, Product, Category} = require('../server/db/models')
 
 async function seed() {
   await db.sync({force: true})
@@ -43,6 +43,16 @@ async function seed() {
         'https://cdn.shopify.com/s/files/1/0221/1146/products/ChocolateFrogPin1_large.png?v=1579875491',
       price: 4.5,
       inventory: 27,
+    }),
+  ])
+
+  const categories = await Promise.all([
+    Category.create({
+      categoryName: 'Candy',
+      description: 'Magical treats for every wizards needs',
+    }),
+    Category.create({
+      categoryName: 'Practical Jokes',
     }),
   ])
 
