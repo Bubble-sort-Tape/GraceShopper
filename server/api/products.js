@@ -46,3 +46,22 @@ router.put('/:productId', async (req, res, next) => {
     next(error)
   }
 })
+
+//DELETE /api/products/:productId
+router.delete('/:productId', async (req, res, next) => {
+  try {
+    const product = await Product.findOne({
+      where: {
+        id: req.params.productId,
+      },
+    })
+    if (!product) {
+      res.sendStatus(404)
+    } else {
+      await product.destroy(req.body)
+      res.sendStatus(204)
+    }
+  } catch (error) {
+    next(error)
+  }
+})
