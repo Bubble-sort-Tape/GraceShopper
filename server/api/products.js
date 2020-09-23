@@ -4,9 +4,16 @@ module.exports = router
 
 /* All Products Routes */
 
+//GET /api/products/
 router.get('/', async (req, res, next) => {
   try {
-    //dostuff
+    const products = await Product.findAll({
+      attributes: ['id', 'name', 'imageUrl', 'price', 'inventory'],
+    })
+
+    //TODO: Confirm currency is sent to front-end as a properly localized string.
+
+    res.json(products)
   } catch (err) {
     next(err)
   }
