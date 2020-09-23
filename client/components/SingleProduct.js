@@ -1,5 +1,15 @@
 import React from 'react'
 
+const dummyData = {
+  id: 1,
+  productName: 'Chocolate Frogs',
+  description:
+    'Chocolate frogs are a very popular sweet made from chocolate in the form of a frog. They come with a collectible card of a famous witch or wizard in each pack. The frogs are made of seventy percent Croakoa. Presumably, this substance is what allows them to act like an actual frog.',
+  imageUrl:
+    'https://cdn.shopify.com/s/files/1/0221/1146/products/ChocolateFrogPin1_large.png?v=1579875491',
+  price: 4.5,
+}
+
 export class SingleProduct extends React.Component {
   constructor() {
     super()
@@ -37,7 +47,6 @@ export class SingleProduct extends React.Component {
               <input type="submit" value="Checkout" />
             </form>
           </div>
-          <div>//ADD TO CART BUTTON</div>
         </div>
       </div>
     )
