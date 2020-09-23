@@ -2,7 +2,7 @@ const Sequelize = require('sequelize')
 const db = require('../db')
 
 const Product = db.define('product', {
-  productName: {
+  name: {
     type: Sequelize.STRING,
     unique: true,
     allowNull: false,
@@ -17,13 +17,15 @@ const Product = db.define('product', {
       'https://vignette.wikia.nocookie.net/harrypotter/images/c/ce/Weasleys_Wizard_Wheezes.png/revision/latest?cb=20161124001602',
   },
   price: {
-    type: Sequelize.DECIMAL,
+    type: Sequelize.INTEGER,
     allowNull: false,
+    validate: {min: 0},
   },
   inventory: {
     type: Sequelize.INTEGER,
     allowNull: false,
     defaultValue: 10,
+    validate: {min: 0},
   },
 })
 
