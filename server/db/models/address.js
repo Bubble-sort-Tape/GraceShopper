@@ -5,6 +5,7 @@ const Address = db.define('address', {
   address1: {
     type: Sequelize.TEXT,
     allowNull: false,
+    isEmpty: false,
   },
   address2: {
     type: Sequelize.TEXT,
@@ -12,15 +13,17 @@ const Address = db.define('address', {
   city: {
     type: Sequelize.TEXT,
     allowNull: false,
+    isEmpty: false,
   },
-  price: {
-    type: Sequelize.DECIMAL,
+  zip: {
+    type: Sequelize.STRING,
     allowNull: false,
+    isEmpty: false,
   },
-  inventory: {
-    type: Sequelize.INTEGER,
+  country: {
+    type: Sequelize.STRING,
     allowNull: false,
-    defaultValue: 10,
+    isEmpty: false,
   },
 })
 

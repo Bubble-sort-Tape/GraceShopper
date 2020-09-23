@@ -2,22 +2,12 @@ const Sequelize = require('sequelize')
 const db = require('../db')
 
 const Order = db.define('order', {
-  orderDate: {
-    type: Sequelize.DATE,
-    allowNull: false,
-    defaultValue: Sequelize.NOW,
-  },
   total: {
-    type: Sequelize.DECIMAL,
+    type: Sequelize.INTEGER,
     allowNull: false,
   },
   paymentMethod: {
     type: Sequelize.STRING,
-    allowNull: false,
-  },
-  shippingAddress: {
-    type: Sequelize.TEXT,
-    allowNull: false,
   },
   firstName: {
     type: Sequelize.STRING,
@@ -30,6 +20,10 @@ const Order = db.define('order', {
   email: {
     type: Sequelize.STRING,
     allowNull: false,
+  },
+  isCart: {
+    type: Sequelize.BOOLEAN,
+    defaultValue: true,
   },
 })
 
