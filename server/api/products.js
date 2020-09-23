@@ -14,10 +14,16 @@ router.get('/', async (req, res, next) => {
 
 /* Single Product Route */
 
+//GET /api/product/:productId
 router.get('/:productId', async (req, res, next) => {
   try {
-    //dostuff
-  } catch (err) {
-    next(err)
+    const product = await Product.findOne({
+      where: {
+        id: req.params.productId,
+      },
+    })
+    res.json(product)
+  } catch (error) {
+    next(error)
   }
 })
