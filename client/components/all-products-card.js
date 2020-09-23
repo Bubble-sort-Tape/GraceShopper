@@ -7,10 +7,9 @@ import PropTypes from 'prop-types'
  */
 export const AllProductsCard = (props) => {
   const {product} = props
-  console.log(product)
   return (
     <div className="all-products-card">
-      <img src={product.imageURL} width="200" height="200"></img>
+      <img src={product.imageUrl} width="200" height="200"></img>
       <div>{product.name}</div>
       <div>{product.price}</div>
     </div>

@@ -8,7 +8,6 @@ import {AllProductsCard} from './all-products-card'
  */
 export const AllProducts = (props) => {
   const {products} = props
-  console.log(products)
 
   return (
     <div>
