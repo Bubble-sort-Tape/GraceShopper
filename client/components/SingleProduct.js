@@ -1,5 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
+import PropTypes from 'prop-types'
 import {fetchSingleProduct} from '../store/singleProduct'
 
 const dummyData = [
@@ -26,6 +27,7 @@ export class SingleProduct extends React.Component {
   }
 
   render() {
+    console.log('\n\n\nhi\n\n\n')
     let {productId} = this.props.match.params
     let products = this.props.products || dummyData
     let product = products.find((obj) => {
@@ -80,3 +82,7 @@ const mapDispatch = (dispatch) => ({
 })
 
 export default connect(mapState, mapDispatch)(SingleProduct)
+
+SingleProduct.propTypes = {
+  products: PropTypes.array,
+}
