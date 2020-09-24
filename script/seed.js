@@ -41,18 +41,18 @@ async function seed() {
     })
   )
 
-  async function orderProductAssociate() {
-    try {
-      for (let i = 1; i < ordersArr.length; i++) {
-        let order = await Order.findOrCreate({where: {id: 4}})
-        //let product = await Order.findOrCreate({where: {id: i}})
-        console.log(order)
-      }
-    } catch (error) {
-      console.error(error)
-    }
-  }
-  orderProductAssociate()
+  // async function orderProductAssociate() {
+  //   try {
+  //     for (let i = 1; i < ordersArr.length; i++) {
+  //       let order = await Order.findOrCreate({where: {id: 4}})
+  //       //let product = await Order.findOrCreate({where: {id: i}})
+  //       console.log(order)
+  //     }
+  //   } catch (error) {
+  //     console.error(error)
+  //   }
+  // }
+  // orderProductAssociate()
 
   console.log(`seeded ${users.length} users`)
   console.log(`seeded ${products.length} products`)
