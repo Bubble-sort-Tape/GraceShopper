@@ -62,7 +62,7 @@ describe('Product routes', () => {
 
     it('GET responds with one specific product', async () => {
       const res = await request(app).get('/api/products/1').expect(200)
-      expect(res.body.name.to.equal("Bertie Bott's Every Flavor Beans"))
+      expect(res.body.name).to.be.equal("Bertie Bott's Every Flavor Beans")
     })
   })
 })
