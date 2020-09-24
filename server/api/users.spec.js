@@ -12,21 +12,45 @@ describe('User routes', () => {
   })
 
   describe('/api/users/', () => {
-    const codysEmail = 'cody@puppybook.com'
+    const testUsers = [
+      {
+        email: 'dumbledore@hogwarts.edu',
+        password: 'nitwitblubberoddmenttweak',
+        firstName: 'Albus',
+        lastName: 'Dumbledore',
+        house: 'Gryffindor',
+        isAdmin: true,
+      },
+      {
+        email: 'snape@hogwarts.edu',
+        password: 'lily',
+        firstName: 'Severus',
+        lastName: 'Snape',
+        house: 'Slytherin',
+        isAdmin: true,
+      },
+      {
+        email: 'voldemort@deatheaters.net',
+        password: 'horcrux',
+        firstName: 'Tom',
+        lastName: 'Riddle',
+        house: 'Slytherin',
+      },
+    ]
 
-    beforeEach(() => {
-      return User.create({
-        email: codysEmail
-      })
+    beforeEach(async () => {
+      for (let user of testUsers) {
+        User.create(user)
+      }
     })
 
-    it('GET /api/users', async () => {
-      const res = await request(app)
-        .get('/api/users')
-        .expect(200)
+    describe('GET /api/users API Route', async () => {
+      it('rejects requests from guests', async () => {
+        request(app).get('/api/users').expect(403)
+      })
 
-      expect(res.body).to.be.an('array')
-      expect(res.body[0].email).to.be.equal(codysEmail)
+      //TODO: it('rejects requests from non-admins')
+      //TODO: it('returns all users to admins')
     })
   }) // end describe('/api/users')
 }) // end describe('User routes')
