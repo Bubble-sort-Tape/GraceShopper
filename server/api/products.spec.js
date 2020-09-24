@@ -11,9 +11,7 @@ describe('Product routes', () => {
     return db.sync({force: true})
   })
 
-  describe('/api/products/ all product routes', () => {
-    //TODO: Implement tests once database is finalized
-    /*
+  describe('All Products Route /api/products', () => {
     const prod = {
       name: "Bertie Bott's Every Flavor Beans",
       //name: "Bertie Bott's Every Flavor Beans",
@@ -24,15 +22,16 @@ describe('Product routes', () => {
       price: 350,
       inventory: 50,
     }
-    Product.create(prod)
+    beforeEach(async () => {
+      await Product.create(prod)
+    })
 
     it('GET /api/products', async () => {
       const res = await request(app).get('/api/products').expect(200)
 
       expect(res.body).to.be.an('array')
-
       expect(res.body[0].imageUrl).to.be.equal(prod.imageUrl)
-    }) */
+    })
   }) // end describe('/api/products')
 
   describe('/api/products/ single product routes', () => {
