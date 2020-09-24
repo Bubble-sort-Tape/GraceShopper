@@ -16,13 +16,16 @@ const OrdersProduct = db.define('OrdersProduct', {
     type: Sequelize.INTEGER,
     allowNull: false,
     validate: {min: 0},
+    defaultValue: 10,
   },
   price: {
     type: Sequelize.INTEGER,
     allowNull: false,
     validate: {min: 0},
+    defaultValue: 15,
   },
 })
+
 Order.belongsToMany(Product, {through: OrdersProduct})
 Product.belongsToMany(Order, {through: OrdersProduct})
 
