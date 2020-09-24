@@ -3,47 +3,15 @@
 const db = require('../server/db')
 const {User, Product} = require('../server/db/models')
 const productsArr = require('./seeds/productsSeed')
+const usersArr = require('./seeds/usersSeed')
 
 async function seed() {
   await db.sync({force: true})
   console.log('db synced!')
 
   const users = await Promise.all([
-    User.create({
-      email: 'harry@hogwarts.edu',
-      password: 'alohomora',
-      firstName: 'Harry',
-      lastName: 'Potter',
-      house: 'Gryffindor',
-      phone: '(555) 123-4567',
-    }),
-    User.create({
-      email: 'hermione@hogwarts.edu',
-      password: 'muggleborn',
-      firstName: 'Hermione',
-      lastName: 'Granger',
-      house: 'Gryffindor',
-    }),
-    User.create({
-      email: 'draco@hogwarts.edu',
-      password: 'deathEater4life',
-      firstName: 'Draco',
-      lastName: 'Malfoy',
-      house: 'Slytherin',
-    }),
-    User.create({
-      email: 'cedric@hogwarts.edu',
-      password: 'triwizardchamp',
-      firstName: 'Cedric',
-      lastName: 'Diggory',
-      house: 'Hufflepuff',
-    }),
-    User.create({
-      email: 'luna@hogwarts.edu',
-      password: 'looney',
-      firstName: 'Luna',
-      lastName: 'Lovegood',
-      house: 'Ravenclaw',
+    usersArr.map((user) => {
+      return User.create(user)
     }),
   ])
 
