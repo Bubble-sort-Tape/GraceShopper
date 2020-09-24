@@ -1,6 +1,7 @@
 /* global describe beforeEach it */
 
 const {expect} = require('chai')
+const {agent} = require('supertest')
 const request = require('supertest')
 const db = require('../db')
 const app = require('../index')
@@ -11,9 +12,7 @@ describe('Product routes', () => {
     return db.sync({force: true})
   })
 
-  describe('/api/products/ all product routes', () => {
-    //TODO: Implement tests once database is finalized
-    /*
+  describe('All Products Route /api/products', () => {
     const prod = {
       name: "Bertie Bott's Every Flavor Beans",
       //name: "Bertie Bott's Every Flavor Beans",
@@ -24,18 +23,25 @@ describe('Product routes', () => {
       price: 350,
       inventory: 50,
     }
-    Product.create(prod)
+    beforeEach(async () => {
+      await Product.create(prod)
+    })
 
     it('GET /api/products', async () => {
       const res = await request(app).get('/api/products').expect(200)
 
       expect(res.body).to.be.an('array')
-
       expect(res.body[0].imageUrl).to.be.equal(prod.imageUrl)
-    }) */
+    })
   }) // end describe('/api/products')
 
-  describe('/api/products/ single product routes', () => {
-    //dostuff
+  describe('/api/products/:productId single product routes', () => {
+    //Finish this once data is final
+    //
+    // it('GET /api/product/:productId responds with one product', async () => {
+    //   const response = await agent.get('/api/products/:productId').expect(200);
+    //   expect(response.body).to.deep.equal(product)
+    // })
+    //
   }) // end describe('/api/products/:productId')
 }) // end describe('Product routes')

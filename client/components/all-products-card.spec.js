@@ -5,6 +5,8 @@ import React from 'react'
 import enzyme, {shallow} from 'enzyme'
 import Adapter from 'enzyme-adapter-react-16'
 import {AllProductsCard} from './all-products-card'
+import {Router} from 'react-router-dom'
+import {createMemoryHistory} from 'history'
 
 const adapter = new Adapter()
 enzyme.configure({adapter})
@@ -16,11 +18,15 @@ const product = {
   imageUrl: 'https://i.imgur.com/DLrwUP7.png',
 }
 
-describe('AllProductsCard', () => {
+describe('AllProductsCard Component', () => {
   let productCard
 
   beforeEach(() => {
-    productCard = shallow(<AllProductsCard product={product} />)
+    productCard = shallow(
+      <Router history={createMemoryHistory()}>
+        <AllProductsCard product={product} />
+      </Router>
+    )
   })
 
   it('displays product name', () => {
@@ -30,6 +36,6 @@ describe('AllProductsCard', () => {
     expect(productCard.html()).to.include(product.price)
   })
   it('displays product image', () => {
-    expect(productCard.find('img').prop('src')).to.equal(product.imageUrl)
+    expect(productCard.html()).to.include(product.imageUrl)
   })
 })

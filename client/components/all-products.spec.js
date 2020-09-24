@@ -24,7 +24,7 @@ const products = [
   },
 ]
 
-describe('AllProducts', () => {
+describe('AllProducts Component', () => {
   let allProducts
 
   beforeEach(() => {
