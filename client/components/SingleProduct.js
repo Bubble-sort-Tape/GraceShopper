@@ -1,4 +1,6 @@
 import React from 'react'
+import {connect} from 'react-redux'
+import {fetchSingleProduct} from '../store/singleProduct'
 
 const dummyData = [
   {
@@ -17,7 +19,10 @@ const dummyData = [
 
 export class SingleProduct extends React.Component {
   constructor(props) {
-    super()
+    super(props)
+    this.state = {
+      product: {},
+    }
   }
 
   render() {
@@ -63,3 +68,15 @@ export class SingleProduct extends React.Component {
     )
   }
 }
+
+const mapState = (state) => ({
+  product: state.singleProduct,
+})
+
+const mapDispatch = (dispatch) => ({
+  fetchSingleProduct: () => {
+    dispatch(fetchSingleProduct())
+  },
+})
+
+export default connect(mapState, mapDispatch)(SingleProduct)
