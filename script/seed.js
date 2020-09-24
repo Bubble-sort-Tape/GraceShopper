@@ -1,7 +1,8 @@
 'use strict'
 
 const db = require('../server/db')
-const {User, Product, Category} = require('../server/db/models')
+const {User, Product} = require('../server/db/models')
+const productsArr = require('./seeds/productsSeed')
 
 async function seed() {
   await db.sync({force: true})
@@ -23,42 +24,37 @@ async function seed() {
       lastName: 'Granger',
       house: 'Gryffindor',
     }),
+    User.create({
+      email: 'draco@hogwarts.edu',
+      password: 'deathEater4life',
+      firstName: 'Draco',
+      lastName: 'Malfoy',
+      house: 'Slytherin',
+    }),
+    User.create({
+      email: 'cedric@hogwarts.edu',
+      password: 'triwizardchamp',
+      firstName: 'Cedric',
+      lastName: 'Diggory',
+      house: 'Hufflepuff',
+    }),
+    User.create({
+      email: 'luna@hogwarts.edu',
+      password: 'looney',
+      firstName: 'Luna',
+      lastName: 'Lovegood',
+      house: 'Ravenclaw',
+    }),
   ])
 
-  const products = await Promise.all([
-    Product.create({
-      name: "Bertie Bott's Every Flavor Beans",
-      description:
-        'Delicious normal jelly beans are mixed with crazy, creepy flavors in a 20-flavor magical medley, which keeps tasters guessing whether they’ll get a tasty or tricky flavor with every bite. Some of the tasty flavors include Marshmallow, Cherry, Cinnamon and Blueberry. These are paired with gross flavors like Vomit, Soap and Earwax as well as odd flavors like Sausage, Grass and Black Pepper for a fun and risky experience.',
-      imageUrl:
-        'https://vignette.wikia.nocookie.net/harrypotter/images/6/60/Bertie_Botts_EFB.png/revision/latest/scale-to-width-down/341?cb=20161128010133',
-      price: 350,
-      inventory: 50,
-    }),
-    Product.create({
-      name: 'Chocolate Frogs',
-      description:
-        'Chocolate frogs are a very popular sweet made from chocolate in the form of a frog. They come with a collectible card of a famous witch or wizard in each pack. The frogs are made of seventy percent Croakoa. Presumably, this substance is what allows them to act like an actual frog.',
-      imageUrl:
-        'https://cdn.shopify.com/s/files/1/0221/1146/products/ChocolateFrogPin1_large.png?v=1579875491',
-      price: 450,
-      inventory: 27,
-    }),
-  ])
-
-  const categories = await Promise.all([
-    Category.create({
-      name: 'Candy',
-      description: 'Magical treats for every wizards needs',
-    }),
-    Category.create({
-      name: 'Practical Jokes',
-    }),
-  ])
+  const products = await Promise.all(
+    productsArr.map((product) => {
+      return Product.create(product)
+    })
+  )
 
   console.log(`seeded ${users.length} users`)
   console.log(`seeded ${products.length} products`)
-  console.log(`seeded ${categories.length} categories`)
   console.log(`seeded successfully`)
 }
 
