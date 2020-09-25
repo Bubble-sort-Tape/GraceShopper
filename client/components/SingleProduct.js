@@ -18,10 +18,13 @@ const dummyData = [
   },
 ]
 
-export const SingleProduct = (props) => {
-  useEffect(() => {
-    props.fetchSingleProduct()
-  }, {})
+export class SingleProduct extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      product: {},
+    }
+  }
 
   const {product} = props || dummyData
   console.log('\n\n\nprops\n\n\n', props)
@@ -82,3 +85,15 @@ export default connect(mapState, mapDispatch)(SingleProduct)
 SingleProduct.propTypes = {
   products: PropTypes.object,
 }
+
+const mapState = (state) => ({
+  product: state.singleProduct,
+})
+
+const mapDispatch = (dispatch) => ({
+  fetchSingleProduct: () => {
+    dispatch(fetchSingleProduct())
+  },
+})
+
+export default connect(mapState, mapDispatch)(SingleProduct)

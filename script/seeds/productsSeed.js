@@ -58,7 +58,7 @@ function createProduct() {
     name: faker.commerce.productName(),
     description: faker.commerce.productDescription(),
     category: categoryArr[Math.floor(Math.random() * categoryArr.length)],
-    imageUrl: faker.image.avatar(),
+    imageUrl: faker.random.image(),
     price: Math.floor(Math.random() * 100),
     inventory: Math.floor(Math.random() * 1000),
   }
