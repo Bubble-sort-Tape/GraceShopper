@@ -44,8 +44,26 @@ describe('Product routes', () => {
     // })
     //
 
-    it('POST /api/product rejects requests not from an admin', async () => {
-      const res = await request(app).post('/api/products').expect(403)
+    const prod = {
+      id: 1,
+      name: "Bertie Bott's Every Flavor Beans",
+      //name: "Bertie Bott's Every Flavor Beans",
+      description:
+        'Delicious normal jelly beans are mixed with crazy, creepy flavors in a 20-flavor magical medley.',
+      imageUrl:
+        'https://vignette.wikia.nocookie.net/harrypotter/images/6/60/Bertie_Botts_EFB.png/revision/latest/scale-to-width-down/341?cb=20161128010133',
+      price: 350,
+      inventory: 50,
+    }
+
+    beforeEach(async () => {
+      await Product.create(prod)
     })
-  }) // end describe('/api/products/:productId')
-}) // end describe('Product routes')
+
+    it('GET responds with one specific product', async () => {
+      const res = await request(app).get('/api/products/1').expect(200)
+      expect(res.body.name).to.be.equal("Bertie Bott's Every Flavor Beans")
+    })
+  })
+})
+
