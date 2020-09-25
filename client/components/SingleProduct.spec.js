@@ -9,7 +9,7 @@ enzyme.configure({adapter})
 
 const product = {
   id: 1,
-  productName: 'Chocolate Frogs',
+  name: 'Chocolate Frogs',
   description:
     'Chocolate frogs are a very popular sweet made from chocolate in the form of a frog. They come with a collectible card of a famous witch or wizard in each pack. The frogs are made of seventy percent Croakoa. Presumably, this substance is what allows them to act like an actual frog.',
   imageUrl:
