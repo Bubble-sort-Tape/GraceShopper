@@ -43,5 +43,9 @@ describe('Product routes', () => {
     //   expect(response.body).to.deep.equal(product)
     // })
     //
+
+    it('POST /api/product rejects requests not from an admin', async () => {
+      const res = await request(app).post('/api/products').expect(403)
+    })
   }) // end describe('/api/products/:productId')
 }) // end describe('Product routes')
