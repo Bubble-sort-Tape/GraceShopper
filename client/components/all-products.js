@@ -28,10 +28,11 @@ export const AllProducts = (props) => {
   }, [])
 
   const {products} = props || dummyData
+  console.log(products)
   return (
     <div>
       <div className="welcome-message">
-        {props.user.id ? (
+        {props.user && props.user.id ? (
           <>Hello there, {props.user.firstName}!</>
         ) : (
           <>Hello there, guest!</>
