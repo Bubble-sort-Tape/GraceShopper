@@ -23,15 +23,21 @@ const dummyData = [
  * COMPONENT
  */
 export const AllProducts = (props) => {
-
   useEffect(() => {
     props.fetchAllProducts()
   }, [])
 
   const {products} = props || dummyData
+  console.log(products)
   return (
     <div>
-      <div>Generic Welcome Message!</div>
+      <div className="welcome-message">
+        {props.user && props.user.id ? (
+          <>Hello there, {props.user.firstName}!</>
+        ) : (
+          <>Hello there, guest!</>
+        )}
+      </div>
       <div className="all-products-list">
         {products.map((product) => (
           <AllProductsCard key={product.id} product={product} />
@@ -46,6 +52,7 @@ export const AllProducts = (props) => {
  */
 const mapStatetoProps = (state) => ({
   products: state.allProducts,
+  user: state.user,
 })
 const mapDispatchtoProps = (dispatch) => ({
   fetchAllProducts: () => {

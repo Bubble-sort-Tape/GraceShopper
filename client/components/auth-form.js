@@ -11,6 +11,13 @@ const AuthForm = (props) => {
 
   return (
     <div>
+      {name === 'signup' ? (
+        <div>
+          {`Welcome to Quaffle House! Please fill out the forms below to create an
+          account :)`}
+        </div>
+      ) : null}
+
       <form onSubmit={handleSubmit} name={name}>
         <div>
           <label htmlFor="email">
