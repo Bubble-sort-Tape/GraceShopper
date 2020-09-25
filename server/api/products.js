@@ -21,7 +21,7 @@ router.get('/', async (req, res, next) => {
 
 /* Single Product Route */
 
-//GET /api/product/:productId
+//GET /api/products/:productId
 router.get('/:productId', async (req, res, next) => {
   try {
     const product = await Product.findOne({
@@ -35,7 +35,42 @@ router.get('/:productId', async (req, res, next) => {
   }
 })
 
-//PUT /api/product/:productId
+/* Admin-Only Product Modification Routes */
+router.use('*', (req, res, next) => {
+  try {
+    if (req.user && req.user.isAdmin) {
+      next()
+    } else {
+      const newErr = new Error('Unauthorized API Request')
+      newErr.status = 403
+      throw newErr
+    }
+  } catch (e) {
+    next(e)
+  }
+})
+
+//POST /api/products/
+router.post('/', async (req, res, next) => {
+  try {
+    const product = await Product.create(req.body, {
+      fields: [
+        'name',
+        'description',
+        'imageUrl',
+        'price',
+        'inventory',
+        'category',
+      ],
+    })
+
+    res.json(product)
+  } catch (error) {
+    next(error)
+  }
+})
+
+//PUT /api/products/:productId
 router.put('/:productId', async (req, res, next) => {
   try {
     const product = await Product.findOne({
@@ -46,7 +81,16 @@ router.put('/:productId', async (req, res, next) => {
     if (!product) {
       res.sendStatus(404)
     } else {
-      const updatedProduct = await product.update(req.body)
+      const updatedProduct = await product.update(req.body, {
+        fields: [
+          'name',
+          'description',
+          'imageUrl',
+          'price',
+          'inventory',
+          'category',
+        ],
+      })
       res.json(updatedProduct)
     }
   } catch (error) {
