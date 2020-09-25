@@ -57,7 +57,7 @@ const createApp = () => {
       secret: process.env.SESSION_SECRET || 'my best friend is Cody',
       store: sessionStore,
       resave: false,
-      saveUninitialized: false
+      saveUninitialized: false,
     })
   )
   app.use(passport.initialize())
@@ -88,8 +88,10 @@ const createApp = () => {
 
   // error handling endware
   app.use((err, req, res, next) => {
-    console.error(err)
-    console.error(err.stack)
+    console.error(err.message)
+    if (!err.status) {
+      console.error(err.stack)
+    }
     res.status(err.status || 500).send(err.message || 'Internal server error.')
   })
 }
