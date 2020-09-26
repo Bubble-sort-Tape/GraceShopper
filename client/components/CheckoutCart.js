@@ -3,6 +3,21 @@ import React, {Component} from 'react'
 export class CheckoutCart extends Component {
   constructor(props) {
     super(props)
+    this.state = {
+      addressShip1: '',
+      addressShip2: '',
+      cityShip: '',
+      zipShip: '',
+      countryShip: '',
+      addressBill1: '',
+      addressBill2: '',
+      cityBill: '',
+      zipBill: '',
+      countryBill: '',
+      creditCard: '',
+      expire: '',
+      cvv: '',
+    }
   }
   render() {
     return (
