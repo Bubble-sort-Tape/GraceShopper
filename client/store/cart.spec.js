@@ -44,7 +44,7 @@ describe('AllProducts Redux', () => {
 
   describe('fetchCartItems', () => {
     it('eventually dispatches the GOT CART action', async () => {
-      mockAxios.onGet('/api/cart').replyOnce(200, fakeCart)
+      mockAxios.onGet('/api/orders/cart').replyOnce(200, fakeCart)
       await store.dispatch(fetchCartItems())
       const actions = store.getActions()
       expect(actions[0].type).to.equal('GOT_CART')
