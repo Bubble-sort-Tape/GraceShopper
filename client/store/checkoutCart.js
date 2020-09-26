@@ -32,6 +32,8 @@ export const getCheckout = (checkout) => async (dispatch) => {
  */
 export default function (state = defaultCheckout, action) {
   switch (action.type) {
+    case GOT_CHECKOUT:
+      return [...state, action.checkout]
     default:
       return state
   }
