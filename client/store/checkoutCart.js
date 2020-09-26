@@ -13,11 +13,19 @@ const defaultCheckout = []
 /**
  * ACTION CREATORS
  */
-export const gotProducts = (checkout) => ({type: GOT_CHECKOUT, checkout})
+export const gotCheckout = (checkout) => ({type: GOT_CHECKOUT, checkout})
 
 /**
  * THUNK CREATORS
  */
+export const getCheckout = (checkout) => async (dispatch) => {
+  try {
+    const {data: checkoutInfo} = await axios.post('/api/addresses', checkout)
+    dispatch(gotCheckout(checkoutInfo))
+  } catch (error) {
+    console.error(error)
+  }
+}
 
 /**
  * REDUCER
