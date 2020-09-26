@@ -1,33 +1,29 @@
 import React, {useEffect} from 'react'
-import {CartItem} from './CartItem'
-import {fetchCartItems} from '../store/cart'
 import {connect} from 'react-redux'
-
-const dummyData = [
-  {
-    id: 1,
-    name: 'beans',
-    price: '1',
-    imageUrl: 'https://i.imgur.com/DLrwUP7.png',
-  },
-  {
-    id: 2,
-    name: 'a wand',
-    price: '10',
-    imageUrl: 'https://i.imgur.com/jim3MSJ.png',
-  },
-]
+import {CartItem} from './CartItem'
+import {fetchCart, fetchCartItems} from '../store/cart'
+import {fetchAllProducts} from '../store/allProducts'
 
 export const Cart = (props) => {
   useEffect(() => {
-    props.getCartItems()
+    props.fetchCart()
+  }, {})
+  useEffect(() => {
+    props.fetchCartItems()
   }, [])
-  const {products} = props
+  useEffect(() => {
+    props.fetchAllProducts()
+  }, [])
+  const {items, products} = props
   return (
     <div>
       <h3>Cart</h3>
-      {products.map((product) => (
-        <CartItem key={product.id} product={product} />
+      {items.map((item) => (
+        <CartItem
+          key={item.productId}
+          product={products.find((product) => product.id === item.productId)}
+          item={item}
+        />
       ))}
       <div>$$$Cart Total$$$</div>
       <button type="submit">Checkout</button>
@@ -37,12 +33,16 @@ export const Cart = (props) => {
 
 const mapState = (state) => {
   return {
-    cart: state.cart,
+    info: state.cart.info,
+    items: state.cart.items,
+    products: state.allProducts,
   }
 }
 
 const mapDispatch = (dispatch) => ({
-  getCartItems: (userId) => dispatch(fetchCartItems(userId)),
+  fetchCart: () => dispatch(fetchCart()),
+  fetchCartItems: () => dispatch(fetchCartItems()),
+  fetchAllProducts: () => dispatch(fetchAllProducts()),
 })
 
 export default connect(mapState, mapDispatch)(Cart)

@@ -3,37 +3,56 @@ const {Order, User, Product} = require('../db/models')
 module.exports = router
 
 // GET /api/orders/cart
+// Cart Info for logged in user
 router.get('/cart', async (req, res, next) => {
   try {
     const user = req.user
-    console.log(user)
+    console.log(req.session)
     if (user) {
-      const cart = await Order.findAll({
-        where: {isCart: true, userId: req.user.id},
-        include: [{model: User}, {model: Product}],
+      const cart = await Order.findOne({
+        where: {userId: user.id, isCart: true},
+        attributes: [
+          'id',
+          'total',
+          'isCart',
+          'userId',
+          'ShippingAddressId',
+          'BillingAddressId',
+        ],
+        include: [{model: Product}],
       })
-      res.json(cart)
+      if (!cart) res.json([])
+      if (!req.session.cart) {
+        req.session.cart = cart.products.map((product) => product.OrderItem)
+      }
+      return res.json(req.session.cart)
     }
+    if (req.session.cart) {
+      return res.json(req.session.cart)
+    }
+    res.json([])
   } catch (error) {
     next(error)
   }
 })
 
-router.get('/cart/:itemId', async (res, req, next) => {
-  try {
-    const user = req.user
-    const product = req.product
-    if (user) {
-      const cartItem = await Order.findOne({
-        where: {userId: req.user.id, product: req.params.itemId},
-        include: [{model: Product}],
-      })
-      res.json(cartItem)
-    }
-  } catch (error) {
-    next(error)
-  }
-})
+// GET /api/orders/cart/items
+// Cart Items for logged in user
+// router.get('/cart/items', async (req, res, next) => {
+//   try {
+//     const user = req.user
+//     if (user) {
+//       const cartItems = await Product.findAll({
+//         include: {model: Order, where: {userId: user.id}}
+//       })
+//       res.json(cartItems)
+//     }
+//   } catch (error) {
+//     next(error)
+//   }
+// })
+
+// POST /api/orders/cart/items/:productId
 
 // ALL ORDERS VIEW FOR ADMIN
 
