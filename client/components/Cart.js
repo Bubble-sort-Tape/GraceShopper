@@ -49,8 +49,6 @@ const mapState = (state) => {
 
 const mapDispatch = (dispatch) => ({
   getCartItems: () => dispatch(fetchCartItems()),
-  editCartItem: (id, quantity) => dispatch(editCartItem(id, quantity)),
-  removeCartItem: (id) => dispatch(removeCartItem(id)),
 })
 
 export default connect(mapState, mapDispatch)(Cart)
