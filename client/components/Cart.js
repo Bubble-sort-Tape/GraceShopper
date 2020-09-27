@@ -9,12 +9,18 @@ const dummyData = [
     name: 'beans',
     price: '1',
     imageUrl: 'https://i.imgur.com/DLrwUP7.png',
+    OrderItem: {
+      quantity: 2,
+    },
   },
   {
     id: 2,
     name: 'a wand',
     price: '10',
     imageUrl: 'https://i.imgur.com/jim3MSJ.png',
+    OrderItem: {
+      quantity: 2,
+    },
   },
 ]
 
