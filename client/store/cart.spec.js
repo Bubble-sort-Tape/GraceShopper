@@ -105,23 +105,22 @@ describe('Cart Redux', () => {
           return prod.id === id
         })
 
-        newProd.OrdersProducts = {quantity, price: newProd.price}
+        newProd.OrderItem = {quantity, price: newProd.price}
         fakeCart.push(newProd)
 
         return [201, fakeCart]
       })
-      await store.dispatch(addCartItem(1, 1))
+      await store.dispatch(addCartItem(4, 1))
       const actions = store.getActions()
       expect(actions[0].type).to.equal('GOT_CART')
       expect(actions[0].cart[2].id).to.equal(4)
-      expect(actions[0].cart[2].quantity).to.equal(1)
+      expect(actions[0].cart[2].OrderItem.quantity).to.equal(1)
     })
   })
 
-  /*
-  describe('editCartItem', () => {
+  /* describe('editCartItem', () => {
     it('eventually dispatches the GOT CART action', async () => {
-      mockAxios.onPost('/api/orders/cart').replyOnce(200, fakeCart)
+      mockAxios.onPost('/api/orders/cart').reply(200, fakeCart)
       await store.dispatch(editCartItem())
       const actions = store.getActions()
       expect(actions[0].type).to.equal('GOT_CART')
@@ -130,12 +129,11 @@ describe('Cart Redux', () => {
   })
   describe('removeCartItems', () => {
     it('eventually dispatches the GOT CART action', async () => {
-      mockAxios.onPost('/api/orders/cart').replyOnce(200, fakeCart)
+      mockAxios.onPost('/api/orders/cart').reply(200, fakeCart)
       await store.dispatch(removeCartItem())
       const actions = store.getActions()
       expect(actions[0].type).to.equal('GOT_CART')
       expect(actions[0].cart).to.deep.equal(fakeCart)
     })
-  })
-   */
+  }) */
 })
