@@ -15,7 +15,7 @@ describe('Cart Redux', () => {
   let store
   let mockAxios
 
-  const initialCart = {
+  const initialClientCart = {
     items: [],
   }
 
@@ -46,13 +46,13 @@ describe('Cart Redux', () => {
     },
   ]
 
-  const fakeCart = [
+  const initialServerCart = [
     {
       id: 1,
       name: 'beans',
       price: '$1',
       imageUrl: 'https://i.imgur.com/DLrwUP7.png',
-      OrdersProducts: {
+      OrderItem: {
         quantity: 2,
         price: 200,
       },
@@ -62,16 +62,18 @@ describe('Cart Redux', () => {
       name: 'a wand',
       price: '$10',
       imageUrl: 'https://i.imgur.com/jim3MSJ.png',
-      OrdersProducts: {
+      OrderItem: {
         quantity: 1,
         price: 250,
       },
     },
   ]
+  let fakeCart = []
 
   beforeEach(() => {
     mockAxios = new MockAdapter(axios)
-    store = mockStore(initialCart)
+    store = mockStore(initialClientCart)
+    fakeCart = Array.from(initialServerCart)
   })
 
   afterEach(() => {
@@ -101,9 +103,7 @@ describe('Cart Redux', () => {
       mockAxios.onPost('/api/orders/cart').reply(function (config) {
         const {id, quantity} = JSON.parse(config.data)
 
-        const newProd = fakeProductsList.find((prod) => {
-          return prod.id === id
-        })
+        const newProd = fakeProductsList.find((prod) => prod.id === id)
 
         newProd.OrderItem = {quantity, price: newProd.price}
         fakeCart.push(newProd)
@@ -118,22 +118,39 @@ describe('Cart Redux', () => {
     })
   })
 
-  /* describe('editCartItem', () => {
-    it('eventually dispatches the GOT CART action', async () => {
-      mockAxios.onPost('/api/orders/cart').reply(200, fakeCart)
-      await store.dispatch(editCartItem())
+  describe('editCartItem', () => {
+    it('correcty modified the item quantity', async () => {
+      mockAxios.onPut('/api/orders/cart').reply(function (config) {
+        const {id, quantity} = JSON.parse(config.data)
+
+        fakeCart = fakeCart.map((prod) => {
+          if (prod.id === id) {
+            prod.OrderItem.quantity = quantity
+          }
+          return prod
+        })
+
+        return [201, fakeCart]
+      })
+      await store.dispatch(editCartItem(1, 3))
       const actions = store.getActions()
       expect(actions[0].type).to.equal('GOT_CART')
-      expect(actions[0].cart).to.deep.equal(fakeCart)
+      expect(actions[0].cart[0].OrderItem.quantity).to.deep.equal(3)
     })
   })
+
   describe('removeCartItems', () => {
-    it('eventually dispatches the GOT CART action', async () => {
-      mockAxios.onPost('/api/orders/cart').reply(200, fakeCart)
-      await store.dispatch(removeCartItem())
+    it('deletes the correct item', async () => {
+      mockAxios.onDelete('/api/orders/cart').reply(function (config) {
+        const {id} = JSON.parse(config.data)
+        fakeCart = fakeCart.filter((prod) => prod.id !== id)
+        return [201, fakeCart]
+      })
+      await store.dispatch(removeCartItem(1))
       const actions = store.getActions()
       expect(actions[0].type).to.equal('GOT_CART')
-      expect(actions[0].cart).to.deep.equal(fakeCart)
+      expect(actions[0].cart.length).to.deep.equal(1)
+      expect(actions[0].cart[0].id).to.deep.equal(2)
     })
-  }) */
+  })
 })
