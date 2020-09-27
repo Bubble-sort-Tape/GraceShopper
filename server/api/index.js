@@ -4,6 +4,8 @@ module.exports = router
 router.use('/users', require('./users'))
 router.use('/products', require('./products'))
 router.use('/addresses', require('./addresses'))
+//temporary orders/checkout until Danielle gets the /orders.js file
+// router.use('/orders/checkout', require('./orders/checkout'))
 
 router.use((req, res, next) => {
   const error = new Error('Not Found')
