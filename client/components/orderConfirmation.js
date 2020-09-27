@@ -27,11 +27,11 @@ export const Confirmation = (props) => {
           width="300"
           src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Bengalese_Eagle_Owl.jpg/1200px-Bengalese_Eagle_Owl.jpg"
         />
-        {/* <img
+        <img
           height="330"
           width="300"
           src="https://www.allaboutbirds.org/guide/assets/photo/71540321-480px.jpg"
-        /> */}
+        />
       </div>
     </div>
   )
