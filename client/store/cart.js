@@ -57,7 +57,9 @@ export const editCartItem = (id, quantity) => async (dispatch) => {
 }
 export const removeCartItem = (id) => async (dispatch) => {
   try {
-    const {data: cartItems} = await axios.delete('/api/orders/cart', {id})
+    const {data: cartItems} = await axios.delete('/api/orders/cart', {
+      data: {id},
+    })
     dispatch(gotCart(cartItems))
   } catch (error) {
     console.error(error)
