@@ -34,7 +34,7 @@ export const getCheckout = (checkout) => async (dispatch) => {
         city: checkout.cityBill,
         zip: checkout.zipBill,
         country: checkout.countryBill,
-      }, //test // test ..test
+      }, //test // test ..test .. test
 
       paymentMethod: String(checkout.creditCard),
     }
