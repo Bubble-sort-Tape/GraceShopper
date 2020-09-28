@@ -11,7 +11,7 @@ router.get('/cart', async (req, res, next) => {
         where: {userId: user.id, isCart: true},
         attributes: [
           'id',
-          'total',
+          //'total',
           'isCart',
           'userId',
           'ShippingAddressId',
@@ -114,6 +114,7 @@ router.post('/checkout', async (req, res, next) => {
     const order = await Order.findOne({
       where: {
         userId: req.user.id,
+        isCart: true,
       },
     })
     await order.createShippingAddress(req.body.shippingAddress)

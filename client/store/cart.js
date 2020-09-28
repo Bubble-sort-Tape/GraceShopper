@@ -11,22 +11,15 @@ const REMOVED_FROM_CART = 'REMOVED_FROM_CART'
 /**
  * INITIAL STATE
  */
-const initialCart = {
-  info: {},
-  items: [],
-}
+const initialCart = []
 
 /**
  * ACTION CREATORS
  */
-// export const gotCart = (info) => ({
-//   type: GOT_CART,
-//   info,
-// })
 
-export const gotCartItems = (items) => ({
-  type: GOT_CART_ITEMS,
-  items,
+export const gotCart = (cart) => ({
+  type: GOT_CART,
+  cart,
 })
 
 export const updatedCart = (item) => ({
@@ -90,13 +83,18 @@ export default function (state = initialCart, action) {
     case GOT_CART:
       return action.cart
     case UPDATED_CART: {
+      let newItem = true
       const newState = state.map((item) => {
         if (item.index === action.item.index) {
+          newItem = false
           return {...item, ...action.item}
         } else {
           return item
         }
       })
+      if (newItem) {
+        newState.push(action.item)
+      }
       return newState
     }
     case REMOVED_FROM_CART:
