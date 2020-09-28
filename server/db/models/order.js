@@ -5,6 +5,7 @@ const Order = db.define('order', {
   total: {
     type: Sequelize.INTEGER,
     allowNull: false,
+    defaultValue: 0,
   },
   paymentMethod: {
     type: Sequelize.STRING,
