@@ -1,5 +1,4 @@
 import React, {useEffect} from 'react'
-
 import CartItem from './CartItem'
 import {fetchCartItems} from '../store/cart'
 import {connect} from 'react-redux'
@@ -14,14 +13,19 @@ export const Cart = (props) => {
   }, [])
 
   const {items} = props
-
+  console.log(items)
   return (
     <div>
       <h3>Cart</h3>
       {items.map((item) => (
         <CartItem key={item.id} product={item} />
       ))}
-      <div>$$$Cart Total$$$</div>
+      <div>
+        {items.reduce((acc, cur) => {
+          acc = acc + cur.OrderItem.price * cur.OrderItem.quantity
+          return acc
+        }, 0)}
+      </div>
       <button
         type="button"
         onClick={() => {

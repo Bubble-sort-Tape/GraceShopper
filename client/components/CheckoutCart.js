@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {Redirect} from 'react-router-dom'
 import {getCheckout} from '../store/checkoutCart'
+import {fetchCartItems} from '../store/cart'
 
 export class CheckoutCart extends Component {
   constructor(props) {
@@ -24,6 +25,10 @@ export class CheckoutCart extends Component {
     }
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleChange = this.handleChange.bind(this)
+  }
+
+  componentDidMount() {
+    this.props.fetchCartItems()
   }
 
   handleChange(event) {
@@ -59,8 +64,16 @@ export class CheckoutCart extends Component {
     if (redirectConfirmation === true) {
       return <Redirect to="/confirmation" />
     }
+    const {items} = this.props
+    console.log(this.props)
     return (
       <div className="checkout">
+        <div>
+          {items.reduce((acc, cur) => {
+            acc = acc + cur.OrderItem.price * cur.OrderItem.quantity
+            return acc
+          }, 0)}
+        </div>
         <form onSubmit={this.handleSubmit}>
           <div className="checkout-left">
             <span> Shipping Address</span>
@@ -132,8 +145,13 @@ export class CheckoutCart extends Component {
   }
 }
 
+const mapState = (state) => ({
+  items: state.cart,
+})
+
 const mapDispatch = (dispatch) => ({
+  fetchCartItems: () => dispatch(fetchCartItems()),
   submitCheckout: (checkout) => dispatch(getCheckout(checkout)),
 })
 
-export default connect(null, mapDispatch)(CheckoutCart)
+export default connect(mapState, mapDispatch)(CheckoutCart)
