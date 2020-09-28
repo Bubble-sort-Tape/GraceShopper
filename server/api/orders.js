@@ -108,6 +108,25 @@ router.delete('/cart/:productId', async (req, res, next) => {
   }
 })
 
+// POST /api/orders/checkout
+router.post('/checkout', async (req, res, next) => {
+  try {
+    const order = await Order.findOne({
+      where: {
+        userId: req.user.id,
+      },
+    })
+    await order.createShippingAddress(req.body.shippingAddress)
+    await order.createBillingAddress(req.body.billingAddress)
+    const updatedOrder = await order.update({
+      isCart: false,
+    })
+    res.json(updatedOrder)
+  } catch (error) {
+    next(error)
+  }
+})
+
 // ALL ORDERS VIEW FOR ADMIN
 
 // GET /api/orders

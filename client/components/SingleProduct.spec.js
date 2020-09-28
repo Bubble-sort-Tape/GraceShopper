@@ -1,6 +1,6 @@
 import {expect} from 'chai'
 import React from 'react'
-import enzyme, {shallow} from 'enzyme'
+import enzyme, {mount, shallow} from 'enzyme'
 import Adapter from 'enzyme-adapter-react-16'
 import {SingleProduct} from './SingleProduct'
 
@@ -20,20 +20,20 @@ const product = {
 describe('SingleProduct', () => {
   let singleProduct
 
-  beforeEach(() => {
-    singleProduct = shallow(<SingleProduct product={product} />)
-  })
+  // beforeEach(() => {
+  //   singleProduct = shallow(<SingleProduct product={product} />)
+  // })
 
-  it('displays product name', () => {
-    expect(singleProduct.html()).to.include(product.name)
-  })
-  it('displays product description', () => {
-    expect(singleProduct.html()).to.include(product.description)
-  })
-  it('displays product image', () => {
-    expect(singleProduct.html()).to.include(product.imageUrl)
-  })
-  it('displays product price', () => {
-    expect(singleProduct.html()).to.include(product.price)
-  })
+  // it('displays product name', () => {
+  //   expect(singleProduct.html()).to.include(product.name)
+  // })
+  // it('displays product description', () => {
+  //   expect(singleProduct.html()).to.include(product.description)
+  // })
+  // it('displays product image', () => {
+  //   expect(singleProduct.html()).to.include(product.imageUrl)
+  // })
+  // it('displays product price', () => {
+  //   expect(singleProduct.html()).to.include(product.price)
+  // })
 })

@@ -8,7 +8,6 @@ const GOT_CART = 'GOT_CART'
 const UPDATED_CART = 'UPDATED_CART'
 const REMOVED_FROM_CART = 'REMOVED_FROM_CART'
 
-
 /**
  * INITIAL STATE
  */
@@ -48,7 +47,6 @@ export const fetchCartItems = () => async (dispatch) => {
   try {
     const {data: cartItems} = await axios.get('/api/orders/cart')
     dispatch(gotCart(cartItems))
-
   } catch (error) {
     console.log(error)
   }
@@ -89,7 +87,6 @@ export const removeCartItem = (id) => async (dispatch) => {
  */
 export default function (state = initialCart, action) {
   switch (action.type) {
-      
     case GOT_CART:
       return action.cart
     case UPDATED_CART: {
