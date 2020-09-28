@@ -18,14 +18,7 @@ router.get('/cart', async (req, res, next) => {
           'BillingAddressId',
         ],
         include: [{model: Product}],
-        defaults: {
-          userId: req.user.id,
-          total: 0,
-          paymentMethod: 'magic',
-          firstName: 'Xander',
-          lastName: 'Bakx',
-          email: req.user.email,
-        },
+        defaults: {userId: req.user.id},
       })
       res.json(cart.products)
     }
@@ -42,14 +35,7 @@ router.post('/cart/:productId', async (req, res, next) => {
         userId: req.user.id,
         isCart: true,
       },
-      defaults: {
-        userId: req.user.id,
-        email: req.user.email,
-        total: 0,
-        paymentMethod: 'magic',
-        firstName: 'Xander',
-        lastName: 'Bakx',
-      },
+      defaults: {userId: req.user.id},
     })
     const [newOrderItem, created] = await OrderItem.findOrCreate({
       where: {
@@ -76,6 +62,37 @@ router.post('/cart/:productId', async (req, res, next) => {
   }
 })
 
+// UPDATE PRODUCT QUANTITY /api/orders/cart/:productId
+router.put('/cart/:productId', async (req, res, next) => {
+  try {
+    const order = await Order.findOne({
+      where: {
+        userId: req.user.id,
+        isCart: true,
+      },
+    })
+    const orderItem = await OrderItem.findOne({
+      where: {
+        productId: Number(req.params.productId),
+        orderId: order.id,
+      },
+    })
+    await orderItem.update(
+      {
+        productId: Number(req.params.productId),
+        orderId: order.id,
+        quantity: req.body.quantity,
+      },
+      {
+        where: {productId: Number(req.params.productId), orderId: order.id},
+      }
+    )
+    res.json(orderItem)
+  } catch (error) {
+    next(error)
+  }
+})
+
 // REMOVE PRODUCT FROM CART /api/orders/cart/:productId
 router.delete('/cart/:productId', async (req, res, next) => {
   try {
@@ -84,14 +101,12 @@ router.delete('/cart/:productId', async (req, res, next) => {
       include: {model: Product},
     })
     const product = await Product.findByPk(req.params.productId)
-    order.removeProduct(product)
-    res.json(order.products)
+    await order.removeProduct(product)
+    res.sendStatus(204)
   } catch (error) {
     next(error)
   }
 })
-
-// POST /api/orders/cart/items/:productId
 
 // ALL ORDERS VIEW FOR ADMIN
 
