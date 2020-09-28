@@ -3,23 +3,31 @@ import axios from 'axios'
 /**
  * ACTION TYPES
  */
+
 const GOT_CART = 'GOT_CART'
 const UPDATED_CART = 'UPDATED_CART'
 const REMOVED_FROM_CART = 'REMOVED_FROM_CART'
+
 
 /**
  * INITIAL STATE
  */
 const initialCart = {
+  info: {},
   items: [],
 }
 
 /**
  * ACTION CREATORS
  */
-export const gotCart = (cart) => ({
-  type: GOT_CART,
-  cart,
+// export const gotCart = (info) => ({
+//   type: GOT_CART,
+//   info,
+// })
+
+export const gotCartItems = (items) => ({
+  type: GOT_CART_ITEMS,
+  items,
 })
 
 export const updatedCart = (item) => ({
@@ -35,10 +43,12 @@ export const removedFromCart = (id) => ({
 /**
  * THUNK CREATORS
  */
+
 export const fetchCartItems = () => async (dispatch) => {
   try {
     const {data: cartItems} = await axios.get('/api/orders/cart')
     dispatch(gotCart(cartItems))
+
   } catch (error) {
     console.log(error)
   }
@@ -79,6 +89,7 @@ export const removeCartItem = (id) => async (dispatch) => {
  */
 export default function (state = initialCart, action) {
   switch (action.type) {
+      
     case GOT_CART:
       return action.cart
     case UPDATED_CART: {
@@ -93,6 +104,7 @@ export default function (state = initialCart, action) {
     }
     case REMOVED_FROM_CART:
       return state.filter((item) => item.id === action.id)
+
     default:
       return state
   }
