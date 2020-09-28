@@ -85,9 +85,9 @@ export default function (state = initialCart, action) {
     case UPDATED_CART: {
       let newItem = true
       const newState = state.map((item) => {
-        if (item.index === action.item.index) {
+        if (item.id === action.item.id) {
           newItem = false
-          return {...item, ...action.item}
+          return action.item
         } else {
           return item
         }

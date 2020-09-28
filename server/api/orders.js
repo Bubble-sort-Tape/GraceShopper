@@ -35,6 +35,7 @@ router.post('/cart/:productId', async (req, res, next) => {
         userId: req.user.id,
         isCart: true,
       },
+      include: [{model: Product}],
       defaults: {userId: req.user.id},
     })
     const [newOrderItem, created] = await OrderItem.findOrCreate({
@@ -56,7 +57,20 @@ router.post('/cart/:productId', async (req, res, next) => {
         }
       )
     }
-    res.json(newOrderItem)
+
+    const newOrder = await Order.findOne({
+      where: {
+        userId: req.user.id,
+        isCart: true,
+      },
+      include: [{model: Product}],
+      defaults: {userId: req.user.id},
+    })
+    const updatedProduct = newOrder.products.find(
+      (prod) => prod.id === newOrderItem.productId
+    )
+
+    res.json(updatedProduct)
   } catch (error) {
     next(error)
   }
@@ -70,6 +84,7 @@ router.put('/cart/:productId', async (req, res, next) => {
         userId: req.user.id,
         isCart: true,
       },
+      include: {model: Product},
     })
     const orderItem = await OrderItem.findOne({
       where: {
@@ -87,7 +102,18 @@ router.put('/cart/:productId', async (req, res, next) => {
         where: {productId: Number(req.params.productId), orderId: order.id},
       }
     )
-    res.json(orderItem)
+
+    const newOrder = await Order.findOne({
+      where: {
+        userId: req.user.id,
+        isCart: true,
+      },
+      include: {model: Product},
+    })
+    const updatedProduct = newOrder.products.find(
+      (prod) => prod.id === orderItem.productId
+    )
+    res.json(updatedProduct)
   } catch (error) {
     next(error)
   }
