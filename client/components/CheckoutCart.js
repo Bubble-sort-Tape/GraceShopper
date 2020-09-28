@@ -1,5 +1,7 @@
 import React, {Component} from 'react'
+import {connect} from 'react-redux'
 import {Redirect} from 'react-router-dom'
+import {getCheckout} from '../store/checkoutCart'
 
 export class CheckoutCart extends Component {
   constructor(props) {
@@ -55,7 +57,7 @@ export class CheckoutCart extends Component {
   render() {
     const redirectConfirmation = this.state.redirectConfirmation
     if (redirectConfirmation === true) {
-      return <Redirect to="/orderConfirmation" />
+      return <Redirect to="/confirmation" />
     }
     return (
       <div className="checkout">
@@ -129,3 +131,9 @@ export class CheckoutCart extends Component {
     )
   }
 }
+
+const mapDispatch = (dispatch) => ({
+  submitCheckout: (checkout) => dispatch(getCheckout(checkout)),
+})
+
+export default connect(null, mapDispatch)(CheckoutCart)

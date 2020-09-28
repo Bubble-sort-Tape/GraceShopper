@@ -38,7 +38,7 @@ export const getCheckout = (checkout) => async (dispatch) => {
       paymentMethod: String(checkout.creditCard),
     }
 
-    const {data: checkoutInfo} = await axios.post('/api/addresses', data)
+    const {data: checkoutInfo} = await axios.post('/api/orders/checkout', data)
     dispatch(gotCheckout(checkoutInfo))
   } catch (error) {
     console.error(error)
