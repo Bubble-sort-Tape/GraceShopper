@@ -1,4 +1,5 @@
 import React, {Component} from 'react'
+import {Redirect} from 'react-router-dom'
 
 export class CheckoutCart extends Component {
   constructor(props) {
@@ -17,6 +18,7 @@ export class CheckoutCart extends Component {
       creditCard: '',
       expire: '',
       cvv: '',
+      redirectConfirmation: false,
     }
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleChange = this.handleChange.bind(this)
@@ -33,23 +35,28 @@ export class CheckoutCart extends Component {
     const checkout = this.state
     this.props.submitCheckout(checkout)
     this.setState({
-      addressShip1: '',
-      addressShip2: '',
-      cityShip: '',
-      zipShip: '',
-      countryShip: '',
-      addressBill1: '',
-      addressBill2: '',
-      cityBill: '',
-      zipBill: '',
-      countryBill: '',
-      creditCard: '',
-      expire: '',
-      cvv: '',
+      // addressShip1: '',
+      // addressShip2: '',
+      // cityShip: '',
+      // zipShip: '',
+      // countryShip: '',
+      // addressBill1: '',
+      // addressBill2: '',
+      // cityBill: '',
+      // zipBill: '',
+      // countryBill: '',
+      // creditCard: '',
+      // expire: '',
+      // cvv: '',
+      redirectConfirmation: true,
     })
   }
 
   render() {
+    const redirectConfirmation = this.state.redirectConfirmation
+    if (redirectConfirmation === true) {
+      return <Redirect to="/orderConfirmation" />
+    }
     return (
       <div className="checkout">
         <form onSubmit={this.handleSubmit}>
