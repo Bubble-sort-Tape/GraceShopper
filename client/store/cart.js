@@ -3,8 +3,11 @@ import axios from 'axios'
 /**
  * ACTION TYPES
  */
-// const GOT_CART = 'GOT_CART'
-const GOT_CART_ITEMS = 'GOT_CART_ITEMS'
+
+const GOT_CART = 'GOT_CART'
+const UPDATED_CART = 'UPDATED_CART'
+const REMOVED_FROM_CART = 'REMOVED_FROM_CART'
+
 
 /**
  * INITIAL STATE
@@ -27,24 +30,57 @@ export const gotCartItems = (items) => ({
   items,
 })
 
+export const updatedCart = (item) => ({
+  type: UPDATED_CART,
+  item,
+})
+
+export const removedFromCart = (id) => ({
+  type: REMOVED_FROM_CART,
+  id,
+})
+
 /**
  * THUNK CREATORS
  */
-// export const fetchCart = () => async (dispatch) => {
-//   try {
-//     const {data: cart} = await axios.get(`/api/orders/cart`)
-//     dispatch(gotCart(cart))
-//   } catch (error) {
-//     console.log(error)
-//   }
-// }
 
 export const fetchCartItems = () => async (dispatch) => {
   try {
     const {data: cartItems} = await axios.get('/api/orders/cart')
-    dispatch(gotCartItems(cartItems))
+    dispatch(gotCart(cartItems))
+
   } catch (error) {
     console.log(error)
+  }
+}
+
+export const addCartItem = (id, quantity) => async (dispatch) => {
+  try {
+    const {data: item} = await axios.post(`/api/orders/cart/${id}`, {
+      quantity,
+    })
+    dispatch(updatedCart(item))
+  } catch (error) {
+    console.error(error)
+  }
+}
+
+export const editCartItem = (id, quantity) => async (dispatch) => {
+  try {
+    const {data: item} = await axios.put(`/api/orders/cart/${id}`, {
+      quantity,
+    })
+    dispatch(updatedCart(item))
+  } catch (error) {
+    console.error(error)
+  }
+}
+export const removeCartItem = (id) => async (dispatch) => {
+  try {
+    await axios.delete(`/api/orders/cart/${id}`)
+    dispatch(removedFromCart(id))
+  } catch (error) {
+    console.error(error)
   }
 }
 
@@ -53,10 +89,22 @@ export const fetchCartItems = () => async (dispatch) => {
  */
 export default function (state = initialCart, action) {
   switch (action.type) {
-    // case GOT_CART:
-    //   return {...state, info: action.info}
-    case GOT_CART_ITEMS:
-      return {...state, items: action.items}
+      
+    case GOT_CART:
+      return action.cart
+    case UPDATED_CART: {
+      const newState = state.map((item) => {
+        if (item.index === action.item.index) {
+          return {...item, ...action.item}
+        } else {
+          return item
+        }
+      })
+      return newState
+    }
+    case REMOVED_FROM_CART:
+      return state.filter((item) => item.id === action.id)
+
     default:
       return state
   }
