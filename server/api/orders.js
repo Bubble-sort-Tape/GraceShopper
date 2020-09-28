@@ -37,12 +37,15 @@ router.post('/cart/:productId', async (req, res, next) => {
       },
       defaults: {userId: req.user.id},
     })
+    const product = await Product.findOne({
+      where: {id: req.params.productId},
+    })
     const [newOrderItem, created] = await OrderItem.findOrCreate({
       where: {
         productId: Number(req.params.productId),
         orderId: order.id,
       },
-      defaults: {quantity: req.body.quantity},
+      defaults: {quantity: req.body.quantity, price: product.price},
     })
     if (!created) {
       await newOrderItem.update(
