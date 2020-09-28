@@ -13,12 +13,18 @@ const products = [
     name: 'beans',
     price: '1',
     imageUrl: 'https://i.imgur.com/DLrwUP7.png',
+    OrderItem: {
+      quantity: 2,
+    },
   },
   {
     id: 2,
     name: 'a wand',
     price: '10',
     imageUrl: 'https://i.imgur.com/jim3MSJ.png',
+    OrderItem: {
+      quantity: 2,
+    },
   },
 ]
 
@@ -26,9 +32,10 @@ describe('Cart Component', () => {
   let cart
 
   beforeEach(() => {
-    cart = shallow(<Cart cart={cart} />)
+    cart = shallow(<Cart products={products} />)
   })
 
+  //todo: fix cart component test
   it('renders all cart items', () => {
     expect(cart.find('CartItem')).to.have.lengthOf(products.length)
   })

@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react'
-import {CartItem} from './CartItem'
+import CartItem from './CartItem'
 import {fetchCartItems} from '../store/cart'
 import {connect} from 'react-redux'
 
@@ -9,12 +9,18 @@ const dummyData = [
     name: 'beans',
     price: '1',
     imageUrl: 'https://i.imgur.com/DLrwUP7.png',
+    OrderItem: {
+      quantity: 2,
+    },
   },
   {
     id: 2,
     name: 'a wand',
     price: '10',
     imageUrl: 'https://i.imgur.com/jim3MSJ.png',
+    OrderItem: {
+      quantity: 2,
+    },
   },
 ]
 
@@ -22,7 +28,7 @@ export const Cart = (props) => {
   useEffect(() => {
     props.getCartItems()
   }, [])
-  const {products} = props
+  const products = props.products || dummyData
   return (
     <div>
       <h3>Cart</h3>
@@ -42,7 +48,7 @@ const mapState = (state) => {
 }
 
 const mapDispatch = (dispatch) => ({
-  getCartItems: (userId) => dispatch(fetchCartItems(userId)),
+  getCartItems: () => dispatch(fetchCartItems()),
 })
 
 export default connect(mapState, mapDispatch)(Cart)

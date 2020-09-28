@@ -1,8 +1,8 @@
-import React, {useEffect} from 'react'
+import React from 'react'
 import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
 import {fetchSingleProduct} from '../store/singleProduct'
-
+import {addCartItem} from '../store/cart'
 const dummyData = [
   {
     id: 1,
@@ -19,20 +19,34 @@ const dummyData = [
 ]
 
 export class SingleProduct extends React.Component {
-  constructor(props) {
+  constructor() {
     super()
     this.state = {
-      product: {},
+      quantity: 1,
     }
-  }
 
+    this.handleAddCartItem = this.handleAddCartItem.bind(this)
+    this.handleQtyChange = this.handleQtyChange.bind(this)
+  }
   componentDidMount() {
     this.props.fetchSingleProduct(this.props.match.params.productId)
   }
 
+  handleAddCartItem(event) {
+    event.preventDefault()
+    this.props.addCartItem(
+      this.props.match.params.productId,
+      this.state.quantity
+    )
+  }
+
+  handleQtyChange(event) {
+    this.setState({quantity: Number(event.target.value)})
+  }
+
   render() {
     const {product} = this.props || dummyData
-    console.log('\n\n\nprops\n\n\n', this.props)
+    //console.log('\n\n\nprops\n\n\n', this.props)
     // let {productId} = props.match.params
     // let products = props.products
     // let product = products.find((obj) => {
@@ -49,25 +63,27 @@ export class SingleProduct extends React.Component {
         <div className="Product-right">
           <div>About this product: {product.description}</div>
           <div>
-            <form>
+            <form onSubmit={this.handleAddCartItem}>
               <label>
                 Quantity
-                <select>
-                  <option selected value="one">
-                    1
-                  </option>
-                  <option value="two">2</option>
-                  <option value="three">3</option>
-                  <option value="four">4</option>
-                  <option value="five">5</option>
-                  <option value="six">6</option>
-                  <option value="seven">7</option>
-                  <option value="eight">8</option>
-                  <option value="nine">9</option>
-                  <option value="ten">10</option>
+                <select
+                  name="quantity"
+                  defaultValue="1"
+                  onChange={this.handleQtyChange}
+                >
+                  <option>1</option>
+                  <option>2</option>
+                  <option>3</option>
+                  <option>4</option>
+                  <option>5</option>
+                  <option>6</option>
+                  <option>7</option>
+                  <option>8</option>
+                  <option>9</option>
+                  <option>10</option>
                 </select>
               </label>
-              <input type="submit" value="Checkout" />
+              <input type="submit" value="Add To Cart" />
             </form>
           </div>
         </div>
@@ -87,6 +103,9 @@ const mapState = (state) => ({
 const mapDispatch = (dispatch) => ({
   fetchSingleProduct: (id) => {
     dispatch(fetchSingleProduct(id))
+  },
+  addCartItem: (id, quantity) => {
+    dispatch(addCartItem(id, quantity))
   },
 })
 

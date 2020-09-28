@@ -12,6 +12,9 @@ const product = {
   name: 'beans',
   price: '1',
   imageUrl: 'https://i.imgur.com/DLrwUP7.png',
+  OrderItem: {
+    quantity: 2,
+  },
 }
 
 describe('CartItem Component', () => {
