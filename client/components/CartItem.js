@@ -17,7 +17,7 @@ export const CartItem = (props) => {
     <div>
       <img src={product.imageUrl} width="200" height="200" />
       <h3>{product.name}</h3>
-      <h3>${product.price}</h3>
+      <h3>{product.price} Sickles</h3>
       <h3>Qty: {product.OrderItem.quantity}</h3>
       <form>
         <label>

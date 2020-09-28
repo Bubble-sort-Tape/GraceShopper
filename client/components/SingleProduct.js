@@ -58,7 +58,7 @@ export class SingleProduct extends React.Component {
         <div className="Product-left">
           <img className="Product-image" src={product.imageUrl} />
           <div>{product.name}</div>
-          <div>Price: ${product.price}</div>
+          <div>Price: {product.price} Sickles</div>
         </div>
         <div className="Product-right">
           <div>About this product: {product.description}</div>
