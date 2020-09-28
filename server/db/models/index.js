@@ -11,7 +11,7 @@ const db = require('../db')
  */
 
 // Order-Product M:M
-const OrdersProduct = db.define('OrdersProduct', {
+const OrderItem = db.define('OrderItem', {
   quantity: {
     type: Sequelize.INTEGER,
     allowNull: false,
@@ -25,8 +25,8 @@ const OrdersProduct = db.define('OrdersProduct', {
     defaultValue: 10,
   },
 })
-Order.belongsToMany(Product, {through: OrdersProduct})
-Product.belongsToMany(Order, {through: OrdersProduct})
+Order.belongsToMany(Product, {through: OrderItem})
+Product.belongsToMany(Order, {through: OrderItem})
 
 // User-Address 1:M
 User.hasMany(Address)
@@ -53,5 +53,5 @@ module.exports = {
   Product,
   Address,
   Order,
-  OrdersProduct,
+  OrderItem,
 }
