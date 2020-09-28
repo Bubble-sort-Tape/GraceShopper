@@ -6,7 +6,6 @@ import axios from 'axios'
 import MockAdapter from 'axios-mock-adapter'
 import configureMockStore from 'redux-mock-store'
 import thunkMiddleware from 'redux-thunk'
-import {fake} from 'faker'
 
 const middlewares = [thunkMiddleware]
 const mockStore = configureMockStore(middlewares)
@@ -92,65 +91,64 @@ describe('Cart Redux', () => {
   })
 
   describe('addCartItem', () => {
-    it('eventually dispatches the GOT CART action', async () => {
-      mockAxios.onPost('/api/orders/cart').reply(201, fakeCart)
-      await store.dispatch(addCartItem(4, 1))
-      const actions = store.getActions()
-      expect(actions[0].type).to.equal('GOT_CART')
-    })
-
     it('returns an updated cart', async () => {
-      mockAxios.onPost('/api/orders/cart').reply(function (config) {
-        const {id, quantity} = JSON.parse(config.data)
+      const targetId = 4
+
+      mockAxios.onPost(`/api/orders/cart/${targetId}`).reply(function (config) {
+        const {quantity} = JSON.parse(config.data)
+        const id = targetId
 
         const newProd = fakeProductsList.find((prod) => prod.id === id)
 
         newProd.OrderItem = {quantity, price: newProd.price}
-        fakeCart.push(newProd)
 
-        return [201, fakeCart]
+        return [201, newProd]
       })
-      await store.dispatch(addCartItem(4, 1))
+      await store.dispatch(addCartItem(targetId, 1))
       const actions = store.getActions()
-      expect(actions[0].type).to.equal('GOT_CART')
-      expect(actions[0].cart[2].id).to.equal(4)
-      expect(actions[0].cart[2].OrderItem.quantity).to.equal(1)
+      expect(actions[0].type).to.equal('UPDATED_CART')
+      expect(actions[0].item.id).to.equal(4)
+      expect(actions[0].item.OrderItem.quantity).to.equal(1)
     })
   })
 
   describe('editCartItem', () => {
     it('correcty modified the item quantity', async () => {
-      mockAxios.onPut('/api/orders/cart').reply(function (config) {
-        const {id, quantity} = JSON.parse(config.data)
+      let targetId = 1
 
-        fakeCart = fakeCart.map((prod) => {
-          if (prod.id === id) {
-            prod.OrderItem.quantity = quantity
-          }
-          return prod
-        })
+      mockAxios.onPut(`/api/orders/cart/${targetId}`).reply(function (config) {
+        const id = targetId
+        const {quantity} = JSON.parse(config.data)
 
-        return [201, fakeCart]
+        const prod = fakeCart.find((prod) => prod.id === id)
+
+        prod.OrderItem.quantity = quantity
+
+        return [201, prod]
       })
-      await store.dispatch(editCartItem(1, 3))
+      await store.dispatch(editCartItem(targetId, 3))
       const actions = store.getActions()
-      expect(actions[0].type).to.equal('GOT_CART')
-      expect(actions[0].cart[0].OrderItem.quantity).to.deep.equal(3)
+      expect(actions[0].type).to.equal('UPDATED_CART')
+      expect(actions[0].item.OrderItem.quantity).to.deep.equal(3)
     })
   })
 
   describe('removeCartItems', () => {
     it('deletes the correct item', async () => {
-      mockAxios.onDelete('/api/orders/cart').reply(function (config) {
-        const {id} = JSON.parse(config.data)
+      //workaround for lack of route params in mockaxios
+      let targetId = 1
+
+      mockAxios.onDelete(`/api/orders/cart/${targetId}`).reply(function () {
+        //this is where req.params would go
+        const id = targetId
         fakeCart = fakeCart.filter((prod) => prod.id !== id)
-        return [201, fakeCart]
+        return [204]
       })
-      await store.dispatch(removeCartItem(1))
+
+      await store.dispatch(removeCartItem(targetId))
       const actions = store.getActions()
-      expect(actions[0].type).to.equal('GOT_CART')
-      expect(actions[0].cart.length).to.deep.equal(1)
-      expect(actions[0].cart[0].id).to.deep.equal(2)
+      expect(actions[0].type).to.equal('REMOVED_FROM_CART')
+      expect(actions[0].id).to.equal(targetId)
     })
   })
 })
