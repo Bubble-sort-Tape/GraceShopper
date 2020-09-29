@@ -18,74 +18,58 @@ const AuthForm = (props) => {
   return (
     <Container className="my-3">
       {name === 'signup' ? (
-        <h4 className="text-center">
+        <h4 className="text-center my-3">
           Welcome to Quaffle House! Please fill out the forms below to create an
           account
         </h4>
       ) : null}
-
-      <Form onSubmit={handleSubmit} name={name}>
-        <Row>
-          <Col>
+      <Row>
+        <Col md={{span: 6, offset: 3}}>
+          <Form onSubmit={handleSubmit} name={name}>
             <Form.Control name="email" placeholder="Email" type="email" />
-          </Col>
-          <Col>
             <Form.Control
               name="password"
               placeholder="Password"
               type="password"
             />
-          </Col>
-        </Row>
-
-        {/* Only show if signing up */}
-        {name === 'signup' ? (
-          <>
-            <Row>
-              <Col>
+            {/* Only show if signing up */}
+            {name === 'signup' ? (
+              <>
                 <Form.Control
                   name="firstName"
                   placeholder="First Name"
                   type="text"
                 />
-              </Col>
-              <Col>
                 <Form.Control
                   name="lastName"
                   placeholder="Last Name"
                   type="text"
                 />
-              </Col>
-            </Row>
-            <Row>
-              <Col>
                 <Form.Control as="select" name="house">
                   <option value="Gryffindor">Gryffindor</option>
                   <option value="Slytherin">Slytherin</option>
                   <option value="Ravenclaw">Ravenclaw</option>
                   <option value="Hufflepuff">Hufflepuff</option>
                 </Form.Control>
-              </Col>
-              <Col>
                 <Form.Control
                   name="phone"
                   placeholder="Phone Number"
                   type="phone"
                 />
-              </Col>
-            </Row>
-          </>
-        ) : null}
-        <Button className="my-2" type="submit">
-          {displayName} with Email
-        </Button>
-        {error && error.response && <div> {error.response.data} </div>}
-      </Form>
-      <Button variant="danger">
-        <a href="/auth/google" style={{color: '#FFF'}}>
-          {displayName} with Google
-        </a>
-      </Button>
+              </>
+            ) : null}
+            <div className="d-flex justify-content-center">
+              <Button type="submit">{displayName} with Email</Button>
+              {error && error.response && <div> {error.response.data} </div>}
+              <Button variant="danger">
+                <a href="/auth/google" style={{color: '#FFF'}}>
+                  {displayName} with Google
+                </a>
+              </Button>
+            </div>
+          </Form>
+        </Col>
+      </Row>
     </Container>
   )
 }
