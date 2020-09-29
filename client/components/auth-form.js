@@ -3,6 +3,12 @@ import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
 import {auth} from '../store'
 
+import Container from 'react-bootstrap/Container'
+import Row from 'react-bootstrap/Row'
+import Col from 'react-bootstrap/Col'
+import Form from 'react-bootstrap/Form'
+import Button from 'react-bootstrap/Button'
+
 /**
  * COMPONENT
  */
@@ -10,70 +16,77 @@ const AuthForm = (props) => {
   const {name, displayName, handleSubmit, error} = props
 
   return (
-    <div>
+    <Container className="my-3">
       {name === 'signup' ? (
-        <div>
-          {`Welcome to Quaffle House! Please fill out the forms below to create an
-          account :)`}
-        </div>
+        <h4 className="text-center">
+          Welcome to Quaffle House! Please fill out the forms below to create an
+          account
+        </h4>
       ) : null}
 
-      <form onSubmit={handleSubmit} name={name}>
-        <div>
-          <label htmlFor="email">
-            <small>Email</small>
-          </label>
-          <input name="email" type="text" />
-        </div>
-        <div>
-          <label htmlFor="password">
-            <small>Password</small>
-          </label>
-          <input name="password" type="password" />
-        </div>
+      <Form onSubmit={handleSubmit} name={name}>
+        <Row>
+          <Col>
+            <Form.Control name="email" placeholder="Email" type="email" />
+          </Col>
+          <Col>
+            <Form.Control
+              name="password"
+              placeholder="Password"
+              type="password"
+            />
+          </Col>
+        </Row>
 
         {/* Only show if signing up */}
         {name === 'signup' ? (
           <>
-            <div>
-              <label htmlFor="firstName">
-                <small>First Name</small>
-              </label>
-              <input name="firstName" type="text" />
-            </div>
-            <div>
-              <label htmlFor="lastName">
-                <small>Last Name</small>
-              </label>
-              <input name="lastName" type="text" />
-            </div>
-            <div>
-              <label htmlFor="house">
-                <small>Wizard House</small>
-              </label>
-              <select name="house">
-                <option value="Gryffindor">Gryffindor</option>
-                <option value="Slytherin">Slytherin</option>
-                <option value="Ravenclaw">Ravenclaw</option>
-                <option value="Hufflepuff">Hufflepuff</option>
-              </select>
-            </div>
-            <div>
-              <label htmlFor="phone">
-                <small>Phone Number</small>
-              </label>
-              <input name="phone" type="text" />
-            </div>
+            <Row>
+              <Col>
+                <Form.Control
+                  name="firstName"
+                  placeholder="First Name"
+                  type="text"
+                />
+              </Col>
+              <Col>
+                <Form.Control
+                  name="lastName"
+                  placeholder="Last Name"
+                  type="text"
+                />
+              </Col>
+            </Row>
+            <Row>
+              <Col>
+                <Form.Control as="select" name="house">
+                  <option value="Gryffindor">Gryffindor</option>
+                  <option value="Slytherin">Slytherin</option>
+                  <option value="Ravenclaw">Ravenclaw</option>
+                  <option value="Hufflepuff">Hufflepuff</option>
+                </Form.Control>
+              </Col>
+              <Col>
+                <Form.Control
+                  name="phone"
+                  placeholder="Phone Number"
+                  type="phone"
+                />
+              </Col>
+            </Row>
           </>
         ) : null}
-
-        <div>
-          <button type="submit">{displayName}</button>
-        </div>
+        <Button className="my-2" type="submit">
+          {displayName} with Email
+        </Button>
         {error && error.response && <div> {error.response.data} </div>}
-      </form>
-      <a href="/auth/google">{displayName} with Google</a>
-    </div>
+      </Form>
+      <Button variant="danger">
+        <a href="/auth/google" style={{color: '#FFF'}}>
+          {displayName} with Google
+        </a>
+      </Button>
+    </Container>
   )
 }
 
