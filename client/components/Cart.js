@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react'
+import React, {useEffect, useState} from 'react'
 import CartItem from './CartItem'
 import {fetchCartItems} from '../store/cart'
 import {connect} from 'react-redux'
@@ -10,9 +10,6 @@ import Table from 'react-bootstrap/Table'
 import Badge from 'react-bootstrap/Badge'
 
 export const Cart = (props) => {
-  // useEffect(() => {
-  //   props.fetchCart()
-  // }, {})
   useEffect(() => {
     props.fetchCartItems()
   }, [])
