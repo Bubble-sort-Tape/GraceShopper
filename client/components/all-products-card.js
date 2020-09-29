@@ -12,9 +12,12 @@ export const AllProductsCard = (props) => {
   return (
     <Card
       className="all-products-card"
-      style={{color: 'white', backgroundColor: '#ECAE19'}}
+      style={{
+        color: 'white',
+        backgroundColor: '#1F4666',
+      }}
     >
-      <Card.Img variant="top" src={product.imageUrl} />
+      <Card.Img variant="top" src={product.imageUrl} width="100" height="250" />
       <Card.Body>
         <Link to={`/products/${product.id}`}>{product.name}</Link>
         <Card.Text>{product.price} Sickles</Card.Text>
