@@ -32,6 +32,26 @@ export default function (state = initialToasts, action) {
           return toast
         }
       })
+    case 'GET_USER':
+      return [
+        ...state,
+        {
+          id: id++,
+          header: 'Signed in',
+          body: `Welcome, ${action.user.firstName}`,
+          show: true,
+        },
+      ]
+    case 'REMOVE_USER':
+      return [
+        ...state,
+        {
+          id: id++,
+          header: 'Signed out',
+          body: `Mischief managed`,
+          show: true,
+        },
+      ]
     case 'UPDATED_CART':
       return [
         ...state,
