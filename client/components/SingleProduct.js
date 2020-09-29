@@ -6,7 +6,6 @@ import {addCartItem} from '../store/cart'
 import Card from 'react-bootstrap/Card'
 import CardGroup from 'react-bootstrap/CardGroup'
 import Form from 'react-bootstrap/Form'
-import Dropdown from 'react-bootstrap/Dropdown'
 import Button from 'react-bootstrap/Button'
 
 export class SingleProduct extends React.Component {
@@ -67,11 +66,12 @@ export class SingleProduct extends React.Component {
                 <br />
                 {product.description}
               </Card.Text>
-              {/* <Form onSubmit={this.handleAddCartItem}>
+              <Form onSubmit={this.handleAddCartItem}>
                 <Form.Control
                   as="select"
                   className="mx-2 s-50"
-                  onChange={handleQtyChange}
+                  onChange={this.handleQtyChange}
+                  style={{maxWidth: 50}}
                 >
                   <option value="1">1</option>
                   <option value="2">2</option>
@@ -87,38 +87,10 @@ export class SingleProduct extends React.Component {
                 <Button type="submit" variant="success">
                   Add To Cart
                 </Button>
-              </Form> */}
+              </Form>
             </Card.Body>
           </Card>
         </CardGroup>
-
-        {/* // <div className="Product-right">
-        //   <div>About this product: {product.description}</div>
-        //   <div>
-        //     <form onSubmit={this.handleAddCartItem}>
-        //       <label>
-        //         Quantity
-        //         <select
-        //           name="quantity"
-        //           defaultValue="1"
-        //           onChange={this.handleQtyChange}
-        //         >
-        //           <option>1</option>
-        //           <option>2</option>
-        //           <option>3</option>
-        //           <option>4</option>
-        //           <option>5</option>
-        //           <option>6</option>
-        //           <option>7</option>
-        //           <option>8</option>
-        //           <option>9</option>
-        //           <option>10</option>
-        //         </select>
-        //       </label>
-        //       <input type="submit" value="Add To Cart" />
-        //     </form>
-        //   </div>
-        // </div> */}
       </>
     )
   }
@@ -142,38 +114,3 @@ const mapDispatch = (dispatch) => ({
 })
 
 export default connect(mapState, mapDispatch)(SingleProduct)
-
-{
-  /* <div className="Product-left">
-<img className="Product-image" src={product.imageUrl} />
-<div>{product.name}</div>
-<div>Price: {product.price} Sickles</div>
-</div>
-<div className="Product-right">
-<div>About this product: {product.description}</div>
-<div>
-  <form onSubmit={this.handleAddCartItem}>
-    <label>
-      Quantity
-      <select
-        name="quantity"
-        defaultValue="1"
-        onChange={this.handleQtyChange}
-      >
-        <option>1</option>
-        <option>2</option>
-        <option>3</option>
-        <option>4</option>
-        <option>5</option>
-        <option>6</option>
-        <option>7</option>
-        <option>8</option>
-        <option>9</option>
-        <option>10</option>
-      </select>
-    </label>
-    <input type="submit" value="Add To Cart" />
-  </form>
-</div>
-</div> */
-}

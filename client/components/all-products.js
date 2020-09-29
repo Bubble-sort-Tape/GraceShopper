@@ -6,21 +6,6 @@ import {fetchAllProducts} from '../store/allProducts'
 import CardDeck from 'react-bootstrap/CardDeck'
 import CardColumns from 'react-bootstrap/CardColumns'
 
-const dummyData = [
-  {
-    id: 1,
-    name: 'beans',
-    price: '$1',
-    imageUrl: 'https://i.imgur.com/DLrwUP7.png',
-  },
-  {
-    id: 2,
-    name: 'a wand',
-    price: '$10',
-    imageUrl: 'https://i.imgur.com/jim3MSJ.png',
-  },
-]
-
 /**
  * COMPONENT
  */
@@ -29,13 +14,13 @@ export const AllProducts = (props) => {
     props.fetchAllProducts()
   }, [])
 
-  const {products} = props || dummyData
+  const {products} = props
   console.log(products)
   return (
     <div>
       <div
         className="welcome-message"
-        style={{color: '#81121C', fontSize: '25px'}}
+        style={{color: '#81121C', fontSize: '25px', padding: '15px'}}
       >
         {props.user && props.user.id ? (
           <>Hello there, {props.user.firstName}!</>
