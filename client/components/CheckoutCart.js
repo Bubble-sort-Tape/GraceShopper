@@ -32,7 +32,6 @@ export class CheckoutCart extends Component {
 
   componentDidMount() {
     this.props.fetchCartItems()
-    this.setState({})
   }
 
   handleChange(event) {
