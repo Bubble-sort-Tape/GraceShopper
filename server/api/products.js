@@ -1,5 +1,6 @@
 const router = require('express').Router()
 const {Product} = require('../db/models')
+const {adminGate} = require('./gatekeeper')
 module.exports = router
 
 /* All Products Routes */
@@ -10,8 +11,6 @@ router.get('/', async (req, res, next) => {
     const products = await Product.findAll({
       attributes: ['id', 'name', 'imageUrl', 'price', 'inventory'],
     })
-
-    //TODO: Confirm currency is sent to front-end as a properly localized string.
 
     res.json(products)
   } catch (err) {
@@ -36,19 +35,7 @@ router.get('/:productId', async (req, res, next) => {
 })
 
 /* Admin-Only Product Modification Routes */
-router.use('*', (req, res, next) => {
-  try {
-    if (req.user && req.user.isAdmin) {
-      next()
-    } else {
-      const newErr = new Error('Unauthorized API Request')
-      newErr.status = 403
-      throw newErr
-    }
-  } catch (e) {
-    next(e)
-  }
-})
+router.use('*', adminGate)
 
 //POST /api/products/
 router.post('/', async (req, res, next) => {
