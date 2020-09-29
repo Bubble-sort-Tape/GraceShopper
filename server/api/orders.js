@@ -21,6 +21,16 @@ router.get('/cart', async (req, res, next) => {
         defaults: {userId: req.user.id},
       })
       res.json(cart.products)
+    } else {
+      if (!req.session.cartId) {
+        const cart = await Order.create()
+        req.session.cartId = cart.id
+      }
+      const foundCart = await Order.findOne({
+        where: {id: req.session.cartId},
+        include: [{model: Product}],
+      })
+      res.json(foundCart)
     }
   } catch (error) {
     next(error)
