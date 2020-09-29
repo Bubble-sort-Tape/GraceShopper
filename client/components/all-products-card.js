@@ -2,6 +2,7 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import PropTypes from 'prop-types'
+import Card from 'react-bootstrap/Card'
 
 /**
  * COMPONENT
@@ -9,13 +10,16 @@ import PropTypes from 'prop-types'
 export const AllProductsCard = (props) => {
   const {product} = props
   return (
-    <div className="all-products-card">
-      <img src={product.imageUrl} width="200" height="200"></img>
-      <div>
+    <Card
+      className="all-products-card"
+      style={{color: 'white', backgroundColor: '#ECAE19'}}
+    >
+      <Card.Img variant="top" src={product.imageUrl} />
+      <Card.Body>
         <Link to={`/products/${product.id}`}>{product.name}</Link>
-      </div>
-      <div>{product.price}</div>
-    </div>
+        <Card.Text>{product.price} Sickles</Card.Text>
+      </Card.Body>
+    </Card>
   )
 }
 
