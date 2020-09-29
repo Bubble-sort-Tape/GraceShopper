@@ -3,20 +3,10 @@ import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
 import {fetchSingleProduct} from '../store/singleProduct'
 import {addCartItem} from '../store/cart'
-const dummyData = [
-  {
-    id: 1,
-    name: 'beans',
-    price: '$1',
-    imageUrl: 'https://i.imgur.com/DLrwUP7.png',
-  },
-  {
-    id: 2,
-    name: 'a wand',
-    price: '$10',
-    imageUrl: 'https://i.imgur.com/jim3MSJ.png',
-  },
-]
+import Card from 'react-bootstrap/Card'
+import CardGroup from 'react-bootstrap/CardGroup'
+import Form from 'react-bootstrap/Form'
+import Button from 'react-bootstrap/Button'
 
 export class SingleProduct extends React.Component {
   constructor() {
@@ -45,49 +35,63 @@ export class SingleProduct extends React.Component {
   }
 
   render() {
-    const {product} = this.props || dummyData
-    //console.log('\n\n\nprops\n\n\n', this.props)
-    // let {productId} = props.match.params
-    // let products = props.products
-    // let product = products.find((obj) => {
-    //   return obj.id === Number(productId)
-    // })
+    const {product} = this.props
 
     return (
-      <div className="Product">
-        <div className="Product-left">
-          <img className="Product-image" src={product.imageUrl} />
-          <div>{product.name}</div>
-          <div>Price: {product.price} Sickles</div>
-        </div>
-        <div className="Product-right">
-          <div>About this product: {product.description}</div>
-          <div>
-            <form onSubmit={this.handleAddCartItem}>
-              <label>
-                Quantity
-                <select
-                  name="quantity"
-                  defaultValue="1"
+      <>
+        <CardGroup style={{display: 'flex'}}>
+          <Card
+            className="m-auto"
+            style={{
+              textAlign: 'center',
+              backgroundColor: '#1F4666',
+              color: 'white',
+            }}
+          >
+            <Card.Img
+              variant="top"
+              className="d-block mx-auto img-fluid w-50"
+              src={product.imageUrl}
+              style={{width: '25rem', verticalAlign: 'middle'}}
+            />
+            <Card.Body>
+              <Card.Title>{product.name}</Card.Title>
+              <Card.Text>Price: {product.price} Sickles</Card.Text>
+            </Card.Body>
+          </Card>
+          <Card>
+            <Card.Body>
+              <Card.Text>
+                <b>About this product:</b>
+                <br />
+                {product.description}
+              </Card.Text>
+              <Form onSubmit={this.handleAddCartItem}>
+                <Form.Control
+                  as="select"
+                  className="mx-2 s-50"
                   onChange={this.handleQtyChange}
+                  style={{maxWidth: 50}}
                 >
-                  <option>1</option>
-                  <option>2</option>
-                  <option>3</option>
-                  <option>4</option>
-                  <option>5</option>
-                  <option>6</option>
-                  <option>7</option>
-                  <option>8</option>
-                  <option>9</option>
-                  <option>10</option>
-                </select>
-              </label>
-              <input type="submit" value="Add To Cart" />
-            </form>
-          </div>
-        </div>
-      </div>
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                  <option value="6">6</option>
+                  <option value="7">7</option>
+                  <option value="8">8</option>
+                  <option value="9">9</option>
+                  <option value="10">10</option>
+                </Form.Control>
+                <Button type="submit" variant="success">
+                  Add To Cart
+                </Button>
+              </Form>
+            </Card.Body>
+          </Card>
+        </CardGroup>
+      </>
     )
   }
 }

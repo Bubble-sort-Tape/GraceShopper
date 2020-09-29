@@ -38,7 +38,6 @@ router.post('/login', async (req, res, next) => {
     } else {
       //after checking password, clean user before returning data
       const cleanedUser = cleanUser(user)
-
       req.login(user, (err) => (err ? next(err) : res.json(cleanedUser)))
     }
   } catch (err) {
@@ -80,6 +79,7 @@ router.post('/logout', (req, res) => {
 
 router.get('/me', (req, res) => {
   if (!req.user) {
+    console.log(req.user)
     res.status(404).send('Not logged in')
   } else {
     //after creating user, clean user instance before returning data
