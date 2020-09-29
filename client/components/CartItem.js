@@ -1,15 +1,17 @@
 import React from 'react'
 import {editCartItem, removeCartItem} from '../store/cart'
 import {connect} from 'react-redux'
+import {Link} from 'react-router-dom'
 
-import Card from 'react-bootstrap/Card'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import Col from 'react-bootstrap/Col'
+import Row from 'react-bootstrap/Row'
+import Image from 'react-bootstrap/Image'
 
 export const CartItem = (props) => {
   const {product} = props
-
+  console.log(product)
   const handleQtyChange = (event) => {
     props.editCartItem(product.id, event.target.value)
   }
@@ -19,38 +21,56 @@ export const CartItem = (props) => {
   }
 
   return (
-    <Card className="align-items-center" style={{width: '20rem'}}>
-      <Card.Img variant="top" src={product.imageUrl} style={{maxWidth: 200}} />
-      <Card.Body>
-        <Card.Title>{product.name}</Card.Title>
-        <Card.Text>{product.price} Sickles</Card.Text>
-        <Card.Subtitle>Qty: {product.OrderItem.quantity}</Card.Subtitle>
-        <Form inline>
-          <Form.Group>
-            <Form.Label className="my-1 mr-2">Quantity</Form.Label>
-            <Form.Control
-              className="my-1 mr-sm-2"
-              as="select"
-              onChange={handleQtyChange}
+    <tr height="75">
+      <td className="align-middle" data-label="Product">
+        <Row>
+          <Col>
+            <Button
+              type="button"
+              variant="outline-danger"
+              size="sm"
+              onClick={handleRemove}
             >
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-              <option value="4">4</option>
-              <option value="5">5</option>
-              <option value="6">6</option>
-              <option value="7">7</option>
-              <option value="8">8</option>
-              <option value="9">9</option>
-              <option value="10">10</option>
-            </Form.Control>
-            <Button className="my-1" type="button" onClick={handleRemove}>
-              Remove
+              <span className="px-1" aria-hidden="true">
+                &times;
+              </span>
             </Button>
-          </Form.Group>
-        </Form>
-      </Card.Body>
-    </Card>
+          </Col>
+          <Col>
+            <Link to={`/products/${product.id}`}>
+              <Image src={product.imageUrl} style={{maxWidth: 50}} />
+            </Link>
+          </Col>
+          <Col xs={6}>
+            <Link to={`/products/${product.id}`}>
+              <div>{product.name}</div>
+            </Link>
+          </Col>
+        </Row>
+      </td>
+      <td data-label="Price">{product.price} Sickles</td>
+      <td data-label="Quantity">
+        <Form.Control
+          as="select"
+          className="mx-2 s-50"
+          onChange={handleQtyChange}
+        >
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+          <option value="6">6</option>
+          <option value="7">7</option>
+          <option value="8">8</option>
+          <option value="9">9</option>
+          <option value="10">10</option>
+        </Form.Control>
+      </td>
+      <td data-label="Total">
+        {product.price * product.OrderItem.quantity} Sickles
+      </td>
+    </tr>
   )
 }
 
