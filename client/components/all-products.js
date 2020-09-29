@@ -3,21 +3,8 @@ import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
 import {AllProductsCard} from './all-products-card'
 import {fetchAllProducts} from '../store/allProducts'
-
-const dummyData = [
-  {
-    id: 1,
-    name: 'beans',
-    price: '$1',
-    imageUrl: 'https://i.imgur.com/DLrwUP7.png',
-  },
-  {
-    id: 2,
-    name: 'a wand',
-    price: '$10',
-    imageUrl: 'https://i.imgur.com/jim3MSJ.png',
-  },
-]
+import CardDeck from 'react-bootstrap/CardDeck'
+import CardColumns from 'react-bootstrap/CardColumns'
 
 /**
  * COMPONENT
@@ -27,21 +14,29 @@ export const AllProducts = (props) => {
     props.fetchAllProducts()
   }, [])
 
-  const {products} = props || dummyData
+  const {products} = props
   console.log(products)
   return (
     <div>
-      <div className="welcome-message">
+      <div
+        className="welcome-message"
+        style={{color: '#81121C', fontSize: '25px', padding: '15px'}}
+      >
         {props.user && props.user.id ? (
           <>Hello there, {props.user.firstName}!</>
         ) : (
-          <>Hello there, guest!</>
+          <>Hello there, Wizard guest!</>
         )}
       </div>
-      <div className="all-products-list">
-        {products.map((product) => (
-          <AllProductsCard key={product.id} product={product} />
-        ))}
+      <div style={{margin: 'auto', width: '55%'}}>
+        <CardColumns
+          className="all-products-list"
+          // style={{width: '55%'}}
+        >
+          {products.map((product) => (
+            <AllProductsCard key={product.id} product={product} />
+          ))}
+        </CardColumns>
       </div>
     </div>
   )
