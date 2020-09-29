@@ -33,18 +33,26 @@ export const AllProducts = (props) => {
   console.log(products)
   return (
     <div>
-      <div className="welcome-message">
+      <div
+        className="welcome-message"
+        style={{color: '#81121C', fontSize: '25px'}}
+      >
         {props.user && props.user.id ? (
           <>Hello there, {props.user.firstName}!</>
         ) : (
-          <>Hello there, guest!</>
+          <>Hello there, Wizard guest!</>
         )}
       </div>
-      <CardColumns className="all-products-list">
-        {products.map((product) => (
-          <AllProductsCard key={product.id} product={product} />
-        ))}
-      </CardColumns>
+      <div style={{margin: 'auto', width: '55%'}}>
+        <CardColumns
+          className="all-products-list"
+          // style={{width: '55%'}}
+        >
+          {products.map((product) => (
+            <AllProductsCard key={product.id} product={product} />
+          ))}
+        </CardColumns>
+      </div>
     </div>
   )
 }

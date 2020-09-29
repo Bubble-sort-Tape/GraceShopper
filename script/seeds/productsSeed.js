@@ -9,33 +9,6 @@ const categoryArr = [
 
 const productsArr = [
   {
-    name: "Bertie Bott's Every Flavor Beans",
-    description:
-      'Delicious normal jelly beans are mixed with crazy, creepy flavors in a 20-flavor magical medley, which keeps tasters guessing whether they’ll get a tasty or tricky flavor with every bite. Some of the tasty flavors include Marshmallow, Cherry, Cinnamon and Blueberry. These are paired with gross flavors like Vomit, Soap and Earwax as well as odd flavors like Sausage, Grass and Black Pepper for a fun and risky experience.',
-    category: 'Sweets',
-    imageUrl:
-      'https://vignette.wikia.nocookie.net/harrypotter/images/6/60/Bertie_Botts_EFB.png/revision/latest/scale-to-width-down/341?cb=20161128010133',
-    price: 350,
-    inventory: 50,
-  },
-  {
-    name: 'Chocolate Frogs',
-    description:
-      'Chocolate frogs are a very popular sweet made from chocolate in the form of a frog. They come with a collectible card of a famous witch or wizard in each pack. The frogs are made of seventy percent Croakoa. Presumably, this substance is what allows them to act like an actual frog.',
-    category: 'Sweets',
-    imageUrl:
-      'https://cdn.shopify.com/s/files/1/0221/1146/products/ChocolateFrogPin1_large.png?v=1579875491',
-    price: 450,
-    inventory: 27,
-  },
-  {
-    name: 'Anti Gravity Hat',
-    description: "Ruin a gentleman's day by making his hat fly away!",
-    category: 'Practical Jokes',
-    price: 750,
-    inventory: 5,
-  },
-  {
     name: 'Ice Cold Butterbeer',
     description:
       'When ordered, an owl will deliver a container with an ice cold glass of Butterbeer, straight from The Three Broomsticks',
@@ -44,6 +17,36 @@ const productsArr = [
       'https://i0.wp.com/topsecretrecipes.com/foodhackerblog/wp-content/uploads/2018/01/butter-beer_top.jpg?resize=500%2C486&ssl=1',
     price: 600,
     inventory: 1000,
+  },
+
+  {
+    name: 'Exploding bonbons',
+    description:
+      'Exploding bonbons contain pure cocoa and Coconut Dynamite. They explode when eaten and intended to cause major injury.',
+    category: 'Explosive Enterprises',
+    imageUrl:
+      'https://vignette.wikia.nocookie.net/harrypotter/images/a/a1/Exploding-bon-bons-lrg.png/revision/latest?cb=20130801024311',
+    price: 1200,
+    inventory: 45,
+  },
+
+  {
+    name: 'Fizzing Whizzbees',
+    description:
+      'Large sherbet balls that will cause a person who sucks on them to float a few inches off of the ground',
+    category: 'Sweets',
+    // imageUrl:
+    //   'https://vignette.wikia.nocookie.net/harrypotter/images/d/d3/Whizzbees.jpg/revision/latest/scale-to-width-down/235?cb=20101019082404',
+    price: 500,
+    inventory: 200,
+  },
+
+  {
+    name: 'Anti Gravity Hat',
+    description: "Ruin a gentleman's day by making his hat fly away!",
+    category: 'Practical Jokes',
+    price: 750,
+    inventory: 5,
   },
   {
     name: 'Fudge Flies',
@@ -111,25 +114,16 @@ const productsArr = [
     price: 340,
     inventory: 50,
   },
+
   {
-    name: 'Exploding bonbons',
+    name: "Bertie Bott's Every Flavor Beans",
     description:
-      'Exploding bonbons contain pure cocoa and Coconut Dynamite. They explode when eaten and intended to cause major injury.',
-    category: 'Explosive Enterprises',
-    imageUrl:
-      'https://vignette.wikia.nocookie.net/harrypotter/images/a/a1/Exploding-bon-bons-lrg.png/revision/latest?cb=20130801024311',
-    price: 1200,
-    inventory: 45,
-  },
-  {
-    name: 'Fizzing Whizzbees',
-    description:
-      'Large sherbet balls that will cause a person who sucks on them to float a few inches off of the ground',
+      'Delicious normal jelly beans are mixed with crazy, creepy flavors in a 20-flavor magical medley, which keeps tasters guessing whether they’ll get a tasty or tricky flavor with every bite. Some of the tasty flavors include Marshmallow, Cherry, Cinnamon and Blueberry. These are paired with gross flavors like Vomit, Soap and Earwax as well as odd flavors like Sausage, Grass and Black Pepper for a fun and risky experience.',
     category: 'Sweets',
     imageUrl:
-      'https://vignette.wikia.nocookie.net/harrypotter/images/d/d3/Whizzbees.jpg/revision/latest/scale-to-width-down/235?cb=20101019082404',
-    price: 500,
-    inventory: 200,
+      'https://vignette.wikia.nocookie.net/harrypotter/images/6/60/Bertie_Botts_EFB.png/revision/latest/scale-to-width-down/341?cb=20161128010133',
+    price: 350,
+    inventory: 50,
   },
   {
     name: 'Canary Creams',
@@ -140,6 +134,16 @@ const productsArr = [
       'https://vignette.wikia.nocookie.net/harrypotter/images/8/84/Canary_Creme_WU.png/revision/latest/scale-to-width-down/240?cb=20200726112015',
     price: 375,
     inventory: 150,
+  },
+  {
+    name: 'Chocolate Frogs',
+    description:
+      'Chocolate frogs are a very popular sweet made from chocolate in the form of a frog. They come with a collectible card of a famous witch or wizard in each pack. The frogs are made of seventy percent Croakoa. Presumably, this substance is what allows them to act like an actual frog.',
+    category: 'Sweets',
+    imageUrl:
+      'https://cdn.shopify.com/s/files/1/0221/1146/products/ChocolateFrogPin1_large.png?v=1579875491',
+    price: 450,
+    inventory: 27,
   },
   {
     name: 'Nose-Biting Teacup',

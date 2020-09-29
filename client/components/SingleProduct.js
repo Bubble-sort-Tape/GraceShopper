@@ -41,7 +41,14 @@ export class SingleProduct extends React.Component {
     return (
       <>
         <CardGroup style={{display: 'flex'}}>
-          <Card className="m-auto" style={{textAlign: 'center'}}>
+          <Card
+            className="m-auto"
+            style={{
+              textAlign: 'center',
+              backgroundColor: '#1F4666',
+              color: 'white',
+            }}
+          >
             <Card.Img
               variant="top"
               className="d-block mx-auto img-fluid w-50"
@@ -56,7 +63,9 @@ export class SingleProduct extends React.Component {
           <Card>
             <Card.Body>
               <Card.Text>
-                <b>About this product:</b> {product.description}
+                <b>About this product:</b>
+                <br />
+                {product.description}
               </Card.Text>
               {/* <Form onSubmit={this.handleAddCartItem}>
                 <Form.Control
