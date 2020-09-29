@@ -1,36 +1,55 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
-import {Link} from 'react-router-dom'
-import {logout} from '../store'
+import {logout, fetchCartItems} from '../store'
+import {Navbar, Nav, Badge} from 'react-bootstrap'
 
-const Navbar = ({handleClick, isLoggedIn}) => (
-  <div>
-    <Link to="/">
-      <h1>Quaffle House</h1>
-      <h2>Great deals and where to find them</h2>
-    </Link>
-    <nav>
-      {isLoggedIn ? (
-        <>
-          {/* The navbar will show these links after you log in */}
-          <Link to="/home">Home</Link>
-          <a href="#" onClick={handleClick}>
-            Logout
-          </a>
-        </>
-      ) : (
-        <>
-          {/* The navbar will show these links before you log in */}
-          <Link to="/login">Login</Link>
-          <Link to="/signup">Sign Up</Link>
-        </>
-      )}
-      <Link to="/cart">Cart</Link>
-    </nav>
-    <hr />
-  </div>
-)
+const navbar = ({handleClick, isLoggedIn, cart, getCartItems}) => {
+  useEffect(() => {
+    getCartItems()
+  }, [])
+
+  return (
+    <Navbar bg="dark" variant="dark" className="justify-content-between">
+      <div>
+        <Navbar.Brand href="/">
+          <img
+            src="/quafflehouse.png"
+            width="80"
+            alt="Quaffle House Logo"
+          ></img>
+        </Navbar.Brand>
+        <Navbar.Text>Fantastic deals and where to find them</Navbar.Text>
+      </div>
+      <Nav className="justify-content-end">
+        {isLoggedIn ? (
+          <>
+            {/* The navbar will show these links after you log in */}
+            <Nav.Link href="/home">Home</Nav.Link>
+            <Nav.Link href="#" onClick={handleClick}>
+              Logout
+            </Nav.Link>
+          </>
+        ) : (
+          <>
+            {/* The navbar will show these links before you log in */}
+            <Nav.Link href="/login">Login</Nav.Link>
+            <Nav.Link href="/signup">Sign Up</Nav.Link>
+          </>
+        )}
+        <Nav.Link href="/cart">
+          Cart
+          <Badge className="mx-2" variant="light">
+            {cart.reduce((acc, cur) => {
+              acc = acc + cur.OrderItem.quantity
+              return acc
+            }, 0)}
+          </Badge>
+        </Nav.Link>
+      </Nav>
+    </Navbar>
+  )
+}
 
 /**
  * CONTAINER
@@ -38,18 +57,16 @@ const Navbar = ({handleClick, isLoggedIn}) => (
 const mapState = (state) => {
   return {
     isLoggedIn: !!state.user.id,
+    cart: state.cart,
   }
 }
 
-const mapDispatch = (dispatch) => {
-  return {
-    handleClick() {
-      dispatch(logout())
-    },
-  }
-}
+const mapDispatch = (dispatch) => ({
+  handleClick: () => dispatch(logout()),
+  getCartItems: () => dispatch(fetchCartItems()),
+})
 
-export default connect(mapState, mapDispatch)(Navbar)
+export default connect(mapState, mapDispatch)(navbar)
 
 /**
  * PROP TYPES

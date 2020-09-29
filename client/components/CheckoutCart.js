@@ -4,6 +4,12 @@ import {Redirect} from 'react-router-dom'
 import {getCheckout} from '../store/checkoutCart'
 import {fetchCartItems} from '../store/cart'
 
+import Container from 'react-bootstrap/Container'
+import Row from 'react-bootstrap/Row'
+import Col from 'react-bootstrap/Col'
+import Form from 'react-bootstrap/Form'
+import Button from 'react-bootstrap/Button'
+
 export class CheckoutCart extends Component {
   constructor(props) {
     super(props)
@@ -65,82 +71,116 @@ export class CheckoutCart extends Component {
       return <Redirect to="/confirmation" />
     }
     const {items} = this.props
-    console.log(this.props)
     return (
-      <div className="checkout">
-        <div>
-          {items.reduce((acc, cur) => {
-            acc = acc + cur.OrderItem.price * cur.OrderItem.quantity
-            return acc
-          }, 0)}
-        </div>
-        <form onSubmit={this.handleSubmit}>
-          <div className="checkout-left">
-            <span> Shipping Address</span>
-            <label htmlFor="addressShip1">Address 1: </label>
-            <input
-              onChange={this.handleChange}
-              name="addressShip1"
-              type="text"
-            />
-            <label htmlFor="addressShip2">Address 2: </label>
-            <input
-              onChange={this.handleChange}
-              name="addressShip2"
-              type="text"
-            />
-            <label htmlFor="cityShip">City: </label>
-            <input onChange={this.handleChange} name="cityShip" type="text" />
-            <label htmlFor="zipShip">Zip Code: </label>
-            <input onChange={this.handleChange} name="zipShip" type="text" />
-            <label htmlFor="countryShip">Country: </label>
-            <input
-              onChange={this.handleChange}
-              name="countryShip"
-              type="text"
-            />
-          </div>
-          <div className="checkout-mid">
-            <div className="checkout-left">
-              <span> Billing Address</span>
-              <label htmlFor="addressBill1">Address 1: </label>
-              <input
+      <Container className="checkout">
+        <h3 className="text-center">Checkout</h3>
+        <Form onSubmit={this.handleSubmit}>
+          <Row className="justify-content-md-center">
+            <Form.Group controlId="formShippingAddress">
+              <span>Shipping Address</span>
+              <Form.Control
+                onChange={this.handleChange}
+                name="addressShip1"
+                placeholder="Street Address"
+                type="text"
+              />
+              <Form.Control
+                onChange={this.handleChange}
+                name="addressShip2"
+                placeholder="Alley, Dormitory, etc."
+                type="text"
+              />
+              <Form.Control
+                onChange={this.handleChange}
+                name="cityShip"
+                placeholder="City"
+                type="text"
+              />
+              <Form.Control
+                onChange={this.handleChange}
+                name="zipShip"
+                placeholder="Zip Code"
+                type="text"
+              />
+              <Form.Control
+                onChange={this.handleChange}
+                name="countryShip"
+                placeholder="Country"
+                type="text"
+              />
+            </Form.Group>
+            <Form.Group>
+              <span>Billing Address</span>
+              <Form.Control
                 onChange={this.handleChange}
                 name="addressBill1"
+                placeholder="Street Address"
                 type="text"
               />
-              <label htmlFor="addressBill2">Address 2: </label>
-              <input
+              <Form.Control
                 onChange={this.handleChange}
                 name="addressBill2"
+                placeholder="Alley, Dormitory, etc."
                 type="text"
               />
-              <label htmlFor="cityBill">City: </label>
-              <input onChange={this.handleChange} name="cityBill" type="text" />
-              <label htmlFor="zipBill">Zip Code: </label>
-              <input onChange={this.handleChange} name="zipBill" type="text" />
-              <label htmlFor="countryBill">Country: </label>
-              <input
+              <Form.Control
+                onChange={this.handleChange}
+                name="cityBill"
+                placeholder="City"
+                type="text"
+              />
+              <Form.Control
+                onChange={this.handleChange}
+                name="zipBill"
+                placeholder="Zip Code"
+                type="text"
+              />
+              <Form.Control
                 onChange={this.handleChange}
                 name="countryBill"
+                placeholder="Country"
                 type="text"
               />
-            </div>
-          </div>
-          <div className="checkout-right">
-            <label htmlFor="creditCard">Credit Card: </label>
-            <input onChange={this.handleChange} name="creditCard" type="text" />
-
-            <label htmlFor="expire">Expiration MM/YY: </label>
-            <input onChange={this.handleChange} name="expire" type="text" />
-
-            <label htmlFor="cvv">CVV: </label>
-            <input onChange={this.handleChange} name="cvv" type="text" />
-          </div>
-
-          <button type="submit">Order Now!</button>
-        </form>
-      </div>
+            </Form.Group>
+            <Form.Group>
+              <span>Credit Information</span>
+              <Form.Control
+                onChange={this.handleChange}
+                name="creditCard"
+                placeholder="Card Number"
+                type="text"
+              />
+              <Form.Control
+                onChange={this.handleChange}
+                name="expire"
+                placeholder="Expiration (MM/YYYY)"
+                type="text"
+              />
+              <Form.Control
+                onChange={this.handleChange}
+                name="cvv"
+                placeholder="CVV"
+                type="text"
+              />
+            </Form.Group>
+          </Row>
+          <Row className="justify-content-md-center">
+            <h4>
+              {items.reduce((acc, cur) => {
+                acc = acc + cur.OrderItem.price * cur.OrderItem.quantity
+                return acc
+              }, 0)}{' '}
+              Sickles
+            </h4>
+          </Row>
+          <Row className="justify-content-md-center">
+            <Button type="submit" variant="success">
+              Order Now!
+            </Button>
+          </Row>
+        </Form>
+        {/* </Row> */}
+      </Container>
     )
   }
 }
