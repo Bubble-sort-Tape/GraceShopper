@@ -158,6 +158,19 @@ router.post('/checkout', async (req, res, next) => {
 })
 
 // ALL ORDERS VIEW FOR ADMIN
+router.use('*', (req, res, next) => {
+  try {
+    if (req.user && req.user.isAdmin) {
+      next()
+    } else {
+      const newErr = new Error('Unauthorized API Request')
+      newErr.status = 403
+      throw newErr
+    }
+  } catch (e) {
+    next(e)
+  }
+})
 
 // GET /api/orders
 router.get('/', async (req, res, next) => {
