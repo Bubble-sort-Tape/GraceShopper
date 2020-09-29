@@ -13,7 +13,6 @@ router.use('*', async (req, res, next) => {
         where: {userId: user.id, isCart: true},
         attributes: [
           'id',
-          //'total',
           'isCart',
           'userId',
           'ShippingAddressId',
@@ -50,6 +49,9 @@ router.use('*', async (req, res, next) => {
 // GET CART ITEMS /api/orders/cart
 router.get('/cart', (req, res, next) => {
   try {
+    if (!req.cart.products) {
+      req.cart.products = []
+    }
     res.json(req.cart.products)
   } catch (error) {
     next(error)

@@ -3,7 +3,6 @@ import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
 import {AllProductsCard} from './all-products-card'
 import {fetchAllProducts} from '../store/allProducts'
-import CardDeck from 'react-bootstrap/CardDeck'
 import CardColumns from 'react-bootstrap/CardColumns'
 
 /**
@@ -15,7 +14,6 @@ export const AllProducts = (props) => {
   }, [])
 
   const {products} = props
-  console.log(products)
   return (
     <div>
       <div
@@ -29,10 +27,7 @@ export const AllProducts = (props) => {
         )}
       </div>
       <div style={{margin: 'auto', width: '55%'}}>
-        <CardColumns
-          className="all-products-list"
-          // style={{width: '55%'}}
-        >
+        <CardColumns className="all-products-list">
           {products.map((product) => (
             <AllProductsCard key={product.id} product={product} />
           ))}

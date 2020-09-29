@@ -107,7 +107,6 @@ const mapDispatch = (dispatch) => {
       for (let i = 0; i < evt.target.length - 1; i++) {
         submitData[evt.target[i].name] = evt.target[i].value
       }
-
       dispatch(auth(submitData, formName))
     },
   }

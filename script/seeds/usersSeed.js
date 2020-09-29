@@ -10,6 +10,7 @@ const usersArr = [
     lastName: 'Potter',
     house: 'Gryffindor',
     phone: '(555) 123-4567',
+    isAdmin: true,
   },
   {
     email: 'hermione@hogwarts.edu',
@@ -41,21 +42,21 @@ const usersArr = [
   },
 ]
 
-function createUsers() {
-  let user = {
-    email: faker.internet.email(),
-    password: faker.internet.password(),
-    firstName: faker.name.firstName(),
-    lastName: faker.name.lastName(),
-    house: houseArr[Math.floor(Math.random() * houseArr.length)],
-  }
-  return user
-}
-function seedUsers() {
-  for (let i = 0; i < 15; i++) {
-    usersArr.push(createUsers())
-  }
-}
-seedUsers()
+// function createUsers() {
+//   let user = {
+//     email: faker.internet.email(),
+//     password: faker.internet.password(),
+//     firstName: faker.name.firstName(),
+//     lastName: faker.name.lastName(),
+//     house: houseArr[Math.floor(Math.random() * houseArr.length)],
+//   }
+//   return user
+// }
+// function seedUsers() {
+//   for (let i = 0; i < 15; i++) {
+//     usersArr.push(createUsers())
+//   }
+// }
+// seedUsers()
 
 module.exports = usersArr

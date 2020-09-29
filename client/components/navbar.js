@@ -12,7 +12,7 @@ const navbar = ({handleClick, isLoggedIn, cart, getCartItems}) => {
   return (
     <Navbar bg="dark" variant="dark" className="justify-content-between">
       <div>
-        <Navbar.Brand href="/">
+        <Navbar.Brand href="/" className="mx-3" style={{margin: 0}}>
           <img
             src="/quafflehouse.png"
             width="80"
@@ -71,7 +71,7 @@ export default connect(mapState, mapDispatch)(navbar)
 /**
  * PROP TYPES
  */
-Navbar.propTypes = {
-  handleClick: PropTypes.func.isRequired,
-  isLoggedIn: PropTypes.bool.isRequired,
-}
+// Navbar.propTypes = {
+//   handleClick: PropTypes.func.isRequired,
+//   isLoggedIn: PropTypes.bool.isRequired,
+// }
