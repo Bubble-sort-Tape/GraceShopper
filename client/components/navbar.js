@@ -21,6 +21,7 @@ const navbar = ({handleClick, isLoggedIn, cart, getCartItems}) => {
         </Navbar.Brand>
         <Navbar.Text>Fantastic deals and where to find them</Navbar.Text>
       </div>
+
       <Nav className="justify-content-end">
         {isLoggedIn ? (
           <>
