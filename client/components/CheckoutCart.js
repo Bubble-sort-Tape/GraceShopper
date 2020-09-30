@@ -73,7 +73,7 @@ export class CheckoutCart extends Component {
     }
     const {items} = this.props
     return (
-      <Container className="checkout">
+      <Container className="checkout" style={{backgroundColor: '#CA992B'}}>
         <h3 className="text-center">Checkout</h3>
         <Form onSubmit={this.handleSubmit}>
           <Row className="justify-content-md-center">

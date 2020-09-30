@@ -35,8 +35,8 @@ const productsArr = [
     description:
       'Large sherbet balls that will cause a person who sucks on them to float a few inches off of the ground',
     category: 'Sweets',
-    // imageUrl:
-    //   'https://vignette.wikia.nocookie.net/harrypotter/images/d/d3/Whizzbees.jpg/revision/latest/scale-to-width-down/235?cb=20101019082404',
+    imageUrl:
+      'https://www.918plate.com/wp-content/uploads/2017/11/Fizzing-Whizzbees-SQ.jpg',
     price: 500,
     inventory: 200,
   },
@@ -57,6 +57,16 @@ const productsArr = [
       'https://images-na.ssl-images-amazon.com/images/I/71Zqv8v%2BBSL._AC_SL1221_.jpg',
     price: 340,
     inventory: 200,
+  },
+  {
+    name: 'Quaffle',
+    description:
+      'The Quaffle is the ball used in Quidditch with which Chasers score goals. Due to the nature of the game, the quaffle must be caught and thrown one-handed. Quaffles sold at Quaffle House are practice quaffles made for students at Hogwarts.',
+    category: 'Explosive Enterprises',
+    imageUrl:
+      'https://images-na.ssl-images-amazon.com/images/I/91toYAtM7qL._AC_SL1500_.jpg',
+    price: 850,
+    inventory: 50,
   },
   {
     name: 'Pepper Imps',
@@ -83,6 +93,8 @@ const productsArr = [
     description:
       'turn into a variety of unexpected things when waved. The cheapest into rubber chickens or briefs when waved, the most expensive beating user around the head.',
     category: 'Practical Jokes',
+    imageUrl:
+      'https://vignette.wikia.nocookie.net/harrypotter/images/0/0e/Fakewand.png/revision/latest/top-crop/width/360/height/450?cb=20141213150844',
     price: 400,
     inventory: 17,
   },
@@ -91,6 +103,8 @@ const productsArr = [
     description:
       'unstoppable fireworks that violently explode when hit by a stunning spell and multiply by ten at any attempt to vanish them. These include a shocking-pink Catherine wheel, fire-breathing dragons, sparklers that spell out profanity, rockets with long tails of silver stars, and standard firecrackers. When any two types collide, they make new effects. Include Basic Blaze Box and Deflagration Deluxe.',
     category: 'Explosive Enterprises',
+    imageUrl:
+      'https://vignette.wikia.nocookie.net/weasleyswizardwheezesroleplay/images/9/92/Weasleys%27_Wildfire_Whiz-bangs.JPG/revision/latest/scale-to-width-down/340?cb=20111225024242',
     price: 220,
     inventory: 300,
   },

@@ -8,7 +8,7 @@ import Image from 'react-bootstrap/Image'
 
 export const Confirmation = (props) => {
   return (
-    <>
+    <div style={{backgroundColor: '#136033'}}>
       <Jumbotron fluid>
         <div
           style={{padding: '30px', textAlign: 'center'}}
@@ -21,8 +21,15 @@ export const Confirmation = (props) => {
         </div>
       </Jumbotron>
       <Container className="owls">
-        <div style={{textAlign: 'center'}}>Our friendly carrier owls!</div>
-
+        <div
+          style={{
+            textAlign: 'center',
+            color: 'white',
+            backgroundColor: '#136033',
+          }}
+        >
+          Our friendly carrier owls!
+        </div>
         <Row>
           <Col xs={6} md={4}>
             <Image
@@ -46,28 +53,7 @@ export const Confirmation = (props) => {
             />
           </Col>
         </Row>
-
-        {/* <img
-          height="330"
-          width="300"
-          src="https://ogden_images.s3.amazonaws.com/www.lockhaven.com/images/2019/12/27162258/Owl1-560x840.jpg"
-        />
-        <img
-          height="330"
-          width="300"
-          src="https://cdn.theatlantic.com/assets/media/img/photo/2020/02/photos-superb-owl-sunday-iv/s01_1103328920/main_1500.jpg"
-        />
-        <img
-          height="330"
-          width="300"
-          src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Bengalese_Eagle_Owl.jpg/1200px-Bengalese_Eagle_Owl.jpg"
-        />
-        <img
-          height="330"
-          width="300"
-          src="https://www.allaboutbirds.org/guide/assets/photo/71540321-480px.jpg"
-        /> */}
       </Container>
-    </>
+    </div>
   )
 }

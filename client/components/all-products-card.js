@@ -15,7 +15,7 @@ export const AllProductsCard = (props) => {
       className="all-products-card"
       style={{
         color: 'black',
-        backgroundColor: '#D0D9E6',
+        backgroundColor: '#86162A',
       }}
     >
       <Card.Img
@@ -24,7 +24,9 @@ export const AllProductsCard = (props) => {
         // width="100" height="250"
       />
       <Card.Body>
-        <Link to={`/products/${product.id}`}>{product.name}</Link>
+        <Link to={`/products/${product.id}`} style={{color: 'white'}}>
+          {product.name}
+        </Link>
         <Card.Text>{product.price} Sickles</Card.Text>
       </Card.Body>
     </Card>

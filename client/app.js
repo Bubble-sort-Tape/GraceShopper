@@ -4,7 +4,12 @@ import Routes from './routes'
 
 const App = () => {
   return (
-    <div style={{backgroundColor: '#A4A4A4', fontFamily: 'fantasy'}}>
+    <div
+      style={{
+        backgroundColor: '#B9B7C6',
+        fontFamily: 'fantasy',
+      }}
+    >
       <ToastList />
       <Navbar />
       <Routes />
