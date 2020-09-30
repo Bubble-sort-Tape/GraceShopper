@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {Redirect} from 'react-router-dom'
 import {getCheckout} from '../store/checkoutCart'
-import {fetchCartItems} from '../store/cart'
+import {fetchCartItems, refreshCart} from '../store/cart'
 
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
@@ -47,6 +47,7 @@ export class CheckoutCart extends Component {
     event.preventDefault()
     const checkout = this.state
     this.props.submitCheckout(checkout)
+    this.props.refreshCart()
     this.setState({
       // addressShip1: '',
       // addressShip2: '',
@@ -192,6 +193,7 @@ const mapState = (state) => ({
 const mapDispatch = (dispatch) => ({
   fetchCartItems: () => dispatch(fetchCartItems()),
   submitCheckout: (checkout) => dispatch(getCheckout(checkout)),
+  refreshCart: () => dispatch(refreshCart()),
 })
 
 export default connect(mapState, mapDispatch)(CheckoutCart)
