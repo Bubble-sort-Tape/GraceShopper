@@ -8,7 +8,6 @@ const App = () => {
     <div
       style={{
         backgroundColor: '#B9B7C6',
-
         fontFamily: 'fantasy',
       }}
     >
