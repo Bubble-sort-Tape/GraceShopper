@@ -12,7 +12,6 @@ describe('Order model', () => {
       let order
       beforeEach(async () => {
         order = await Order.create({
-          total: 999,
           firstName: 'Ron',
           lastName: 'Weasley',
           email: 'ron@hogwarts.edu',
@@ -20,7 +19,7 @@ describe('Order model', () => {
       })
 
       it('produces correct order total', () => {
-        expect(order.total).to.be.equal(999)
+        expect(order.firstName).to.be.equal('Ron')
       })
     })
   })

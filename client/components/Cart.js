@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import React, {useEffect} from 'react'
 import CartItem from './CartItem'
 import {fetchCartItems} from '../store/cart'
 import {connect} from 'react-redux'
@@ -47,7 +47,7 @@ export const Cart = (props) => {
           {items.reduce((acc, cur) => {
             acc = acc + cur.OrderItem.price * cur.OrderItem.quantity
             return acc
-          }, 0)}{' '}
+          }, 0)}
           Sickles
         </h5>
         <div>
@@ -66,7 +66,7 @@ export const Cart = (props) => {
     </Container>
   ) : (
     <Container>
-      <h3 className="text-center">Cart is Empty</h3>
+      <h3 className="text-center my-2">Cart is Empty</h3>
     </Container>
   )
 }

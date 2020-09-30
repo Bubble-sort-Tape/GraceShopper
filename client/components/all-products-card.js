@@ -1,5 +1,4 @@
 import React from 'react'
-import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import PropTypes from 'prop-types'
 import Card from 'react-bootstrap/Card'
@@ -18,11 +17,7 @@ export const AllProductsCard = (props) => {
         backgroundColor: '#86162A',
       }}
     >
-      <Card.Img
-        variant="top"
-        src={product.imageUrl}
-        // width="100" height="250"
-      />
+      <Card.Img variant="top" src={product.imageUrl} />
       <Card.Body>
         <Link to={`/products/${product.id}`} style={{color: 'white'}}>
           {product.name}

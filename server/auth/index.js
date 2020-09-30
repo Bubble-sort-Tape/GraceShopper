@@ -79,7 +79,6 @@ router.post('/logout', (req, res) => {
 
 router.get('/me', (req, res) => {
   if (!req.user) {
-    console.log(req.user)
     res.status(404).send('Not logged in')
   } else {
     //after creating user, clean user instance before returning data

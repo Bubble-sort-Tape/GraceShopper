@@ -11,7 +11,6 @@ import Image from 'react-bootstrap/Image'
 
 export const CartItem = (props) => {
   const {product} = props
-  console.log(product)
   const handleQtyChange = (event) => {
     props.editCartItem(product.id, event.target.value)
   }

@@ -8,7 +8,7 @@ const GOT_PRODUCTS = 'GOT_PRODUCTS'
 /**
  * INITIAL STATE
  */
-const defaultProductsList = [{name: '', imageUrl: '', price: ''}]
+const defaultProductsList = []
 
 /**
  * ACTION CREATORS

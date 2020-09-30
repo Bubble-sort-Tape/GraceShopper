@@ -6,7 +6,6 @@ import {fetchCartItems, refreshCart} from '../store/cart'
 
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
-import Col from 'react-bootstrap/Col'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 
@@ -14,19 +13,17 @@ export class CheckoutCart extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      addressShip1: '',
-      addressShip2: '',
-      cityShip: '',
-      zipShip: '',
-      countryShip: '',
-      addressBill1: '',
-      addressBill2: '',
-      cityBill: '',
-      zipBill: '',
-      countryBill: '',
-      creditCard: '',
-      expire: '',
-      cvv: '',
+      addressShip1: '4 Privet Dr',
+      cityShip: 'Little Whinging',
+      zipShip: '8675309',
+      countryShip: 'England',
+      addressBill1: '4 Privet Dr',
+      cityBill: 'Little Whinging',
+      zipBill: '8675309',
+      countryBill: 'England',
+      creditCard: '1234 5678 9123 4567',
+      expire: '1/1/1970',
+      cvv: '321',
       redirectConfirmation: false,
     }
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -49,19 +46,6 @@ export class CheckoutCart extends Component {
     this.props.submitCheckout(checkout)
     this.props.refreshCart()
     this.setState({
-      // addressShip1: '',
-      // addressShip2: '',
-      // cityShip: '',
-      // zipShip: '',
-      // countryShip: '',
-      // addressBill1: '',
-      // addressBill2: '',
-      // cityBill: '',
-      // zipBill: '',
-      // countryBill: '',
-      // creditCard: '',
-      // expire: '',
-      // cvv: '',
       redirectConfirmation: true,
     })
   }
@@ -72,6 +56,7 @@ export class CheckoutCart extends Component {
       return <Redirect to="/confirmation" />
     }
     const {items} = this.props
+
     return (
       <Container className="checkout" style={{backgroundColor: '#CA992B'}}>
         <h3 className="text-center">Checkout</h3>
@@ -82,6 +67,7 @@ export class CheckoutCart extends Component {
               <Form.Control
                 onChange={this.handleChange}
                 name="addressShip1"
+                value={this.state.addressShip1}
                 placeholder="Street Address"
                 type="text"
               />
@@ -94,18 +80,21 @@ export class CheckoutCart extends Component {
               <Form.Control
                 onChange={this.handleChange}
                 name="cityShip"
+                value={this.state.cityShip}
                 placeholder="City"
                 type="text"
               />
               <Form.Control
                 onChange={this.handleChange}
                 name="zipShip"
+                value={this.state.zipShip}
                 placeholder="Zip Code"
                 type="text"
               />
               <Form.Control
                 onChange={this.handleChange}
                 name="countryShip"
+                value={this.state.countryShip}
                 placeholder="Country"
                 type="text"
               />
@@ -115,6 +104,7 @@ export class CheckoutCart extends Component {
               <Form.Control
                 onChange={this.handleChange}
                 name="addressBill1"
+                value={this.state.addressBill1}
                 placeholder="Street Address"
                 type="text"
               />
@@ -127,18 +117,21 @@ export class CheckoutCart extends Component {
               <Form.Control
                 onChange={this.handleChange}
                 name="cityBill"
+                value={this.state.cityBill}
                 placeholder="City"
                 type="text"
               />
               <Form.Control
                 onChange={this.handleChange}
                 name="zipBill"
+                value={this.state.zipBill}
                 placeholder="Zip Code"
                 type="text"
               />
               <Form.Control
                 onChange={this.handleChange}
                 name="countryBill"
+                value={this.state.countryBill}
                 placeholder="Country"
                 type="text"
               />
@@ -148,18 +141,21 @@ export class CheckoutCart extends Component {
               <Form.Control
                 onChange={this.handleChange}
                 name="creditCard"
+                value={this.state.creditCard}
                 placeholder="Card Number"
                 type="text"
               />
               <Form.Control
                 onChange={this.handleChange}
                 name="expire"
+                value={this.state.expire}
                 placeholder="Expiration (MM/YYYY)"
                 type="text"
               />
               <Form.Control
                 onChange={this.handleChange}
                 name="cvv"
+                value={this.state.cvv}
                 placeholder="CVV"
                 type="text"
               />
