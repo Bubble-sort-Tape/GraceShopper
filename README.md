@@ -1,5 +1,5 @@
 # Quaffle House
-_GoalHero is a fictional ecommerce site that sells items from the Wizarding World of Harry Potter._
+_Quaffle House is a fictional ecommerce site that sells items from the Wizarding World of Harry Potter._
 
 ## How to Use Quaffle House 
 Quaffle House is deployed here: http://quaffle-house.herokuapp.com/
