@@ -35,7 +35,7 @@ npm run seed
 ```
 
 ## Deployment
-GoalHero is deployed on Heroku, as shown from the link provided above. 
+Quaffle House is deployed on Heroku, as shown from the link provided above. 
 
 ## Built With
 
